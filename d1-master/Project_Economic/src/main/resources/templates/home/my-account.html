@@ -29,9 +29,8 @@
     <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Products</a></li>
-                    <li class="breadcrumb-item active">My Account</li>
+                    <li class="breadcrumb-item"><a href="#">Estore</a></li>
+                    <li class="breadcrumb-item ">Tài khoản</li>
                 </ul>
             </div>
         </div>
@@ -43,9 +42,9 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
-                            <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Payment Method</a>
-                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Account Details</a>
+                            <a class="nav-link active" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Đơn hàng</a>
+<!--                            <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Phương thức thanh toán</a>-->
+                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Thông tin tài khoản</a>
                         </div>
                     </div>
                     <div class="col-md-9">
@@ -56,13 +55,13 @@
                                     <table class="table table-bordered">
                                         <thead class="thead-dark">
                                             <tr>
-                                                <th>No</th>
-                                                <th>Product Name</th>
-                                                <th>Product</th>
-                                                <th>Date</th>
-                                                <th>Quantity</th>
-                                                <th>Total</th>
-                                                <th>Received</th>
+                                                <th>STT</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Hình ảnh</th>
+                                                <th>Ngày đặt</th>
+                                                <th>Số lượng</th>
+                                                <th>Số tiền</th>
+                                                <th>Chi tiết</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -81,14 +80,11 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
-                                <h4>Payment Method</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
-                                </p> 
-                            </div>
+<!--                            <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">-->
+
+<!--                            </div>-->
                             <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
-                                <h4>Account Details</h4>
+                                <h4>Thay đổi thông tin</h4>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <input class="form-control" type="text" th:placeholder="${user.getUsername()}">
@@ -97,26 +93,58 @@
                                         <input class="form-control" type="text" th:placeholder="${user.getEmail()}">
                                     </div>
                                     <div class="col-md-6">
-                                        <input class="form-control" type="text" th:placeholder="'Total money in account : '+ ${user.getTotalMany()}">
+                                        <input class="form-control" type="text" th:placeholder="'Tổng số tiền còn lại: '+ ${user.getTotalMany()}">
                                     </div>
                                     <div class="col-md-12">
-                                        <button class="btn">Update Account</button>
+                                        <button class="btn">Cập nhật</button>
                                         <br><br>
                                     </div>
                                 </div>
-                                <h4>Password change</h4>
+                                <h4>Đổi mật khẩu</h4>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input class="form-control" type="text" placeholder="Current Password">
+                                        <input class="form-control" type="text" placeholder="Mật khẩu hiện tại">
                                     </div>
                                     <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="New Password">
+                                        <input class="form-control" type="text" placeholder="Mật khẩu mới">
                                     </div>
                                     <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Confirm Password">
+                                        <input class="form-control" type="text" placeholder="Nhập lại mật khẩu">
                                     </div>
                                     <div class="col-md-12">
-                                        <button class="btn">Save Changes</button>
+                                        <button class="btn">Lưu thay đổi</button>
+                                        <br><br>
+                                    </div>
+                                </div>
+                                <h4>Thay đổi thông tin</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" th:placeholder="${user.getUsername()}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" th:placeholder="${user.getEmail()}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" th:placeholder="'Tổng số tiền còn lại: '+ ${user.getTotalMany()}">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="btn">Cập nhật</button>
+                                        <br><br>
+                                    </div>
+                                </div>
+                                <h4>Đổi mật khẩu</h4>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="form-control" type="text" placeholder="Mật khẩu hiện tại">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" placeholder="Mật khẩu mới">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" placeholder="Nhập lại mật khẩu">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="btn">Lưu thay đổi</button>
                                     </div>
                                 </div>
                             </div>

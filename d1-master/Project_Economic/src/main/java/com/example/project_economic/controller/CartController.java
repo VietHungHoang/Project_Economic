@@ -26,7 +26,7 @@ public class CartController {
     public String updateCard(@PathVariable Long cardId
             , @PathVariable Integer quantity){
         CartItemEntity cartItemEntity= this.cartItemService.updateCard(cardId,quantity);
-        Double total=cartItemEntity.totalInCartItem();
+        Long total=cartItemEntity.totalInCartItem();
         return String.valueOf(total);
     }
     @DeleteMapping("/delete/{cartId}")

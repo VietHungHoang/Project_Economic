@@ -4,8 +4,6 @@
         <meta charset="utf-8">
         <title>E Store - eCommerce HTML Template</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="eCommerce HTML Template Free Download" name="keywords">
-        <meta content="eCommerce HTML Template Free Download" name="description">
         <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
         <!-- Favicon -->
         <link th:href="@{/images/favicon.ico}" rel="icon">
@@ -36,11 +34,11 @@
 
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto">
-                                <a th:href="@{/api/products/all/1}" class="nav-item nav-link">Products</a>
-                                <a href="#" class="nav-item nav-link" onclick="getNumberCartInEveryPage()">Cart</a>
-                                <a th:href="@{/api/users/categories}" class="nav-item nav-link">Cagories</a>
-                                <a th:href="@{/api/products/create}" class="nav-item nav-link">Create Product </a>
-                                <a href="#" class="nav-item nav-link" onclick="topageHistory()">My Account</a>
+                                <a th:href="@{/api/products/all/1}" class="nav-item nav-link">Sản phẩm</a>
+                                <a href="#" class="nav-item nav-link" onclick="getNumberCartInEveryPage()">Giỏ hàng</a>
+                                <a th:href="@{/api/users/categories}" class="nav-item nav-link">Danh mục</a>
+                                <a th:href="@{/api/products/create}" class="nav-item nav-link">Tạo sản phẩm</a>
+                                <a href="#" class="nav-item nav-link" onclick="topageHistory()">Tài khoản</a>
                             </div>
                             <div class="navbar-nav ml-auto">
                                 <div class="nav-item dropdown">
@@ -62,7 +60,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-3">
                         <div class="logo">
-                            <a href="index.html">
+                            <a th:href="@{/api/products/all/1}">
                                 <img th:src="@{/images/logo.png}" alt="Logo">
                             </a>
                         </div>

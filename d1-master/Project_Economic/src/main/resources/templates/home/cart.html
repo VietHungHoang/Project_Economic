@@ -41,7 +41,7 @@
                                         <p th:text="${cartITem.getProductResponse().name}"></p>
                                     </div>
                                 </td>
-                                <td th:text="${cartITem.getProductResponse().getCostPrice()}"></td>
+                                <td th:text="${cartITem.getProductResponse().getSalePriceFormat()} + '₫'"></td>
                                 <td>
                                     <div class="qtyincart">
                                         <button class="btn-minus"><i class="fa fa-minus"></i></button>
@@ -50,8 +50,8 @@
                                         <input type="hidden" th:value="${cartITem.id}" class="cartIdInCard"/>
                                     </div>
                                 </td>
-                                <td th:id="totalmaney+${cartITem.getId()}" th:class="totalmaney">
-                                    [[${cartITem.totalInCartItem()}]]
+                                <td th:id="totalmaney+${cartITem.getId()}" th:class="totalmaney" th:text="${cartITem.totalInCartItem()} + '₫'" >
+<!--                                    [[${cartITem.totalInCartItem()}]]-->
                                 </td>
                                 <td class="td_removecard">
                                     <button class="btn_removecart"><i class="fa fa-trash"></i>
@@ -77,7 +77,7 @@
                         <div class="col-md-12">
                             <div class="cart-summary">
                                 <div class="cart-content">
-                                    <h2>Total<span class="grandtotalcart">$100</span></h2>
+                                    <h2>Tổng<span class="grandtotalcart">$100</span></h2>
                                 </div>
                                 <div class="cart-btn">
                                     <button onclick="buy_product()">Mua ngay</button>
@@ -120,6 +120,7 @@
 <script th:inline="javascript">
     sumTotal();
 
+
     $('.qtyincart button').on('click', function () {
         var $button = $(this);
         var oldValue = $button.parent().find('input').eq(0).val();
@@ -153,6 +154,12 @@
         )
     });
 
+    function formatNumberWithCommas(number) {
+        let formattedNumber = number.toString();
+        formattedNumber = formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        return formattedNumber;
+    }
+
     function sumTotal() {
         var total = 0;
         var numbercart=0;
@@ -163,8 +170,10 @@
         chageFragment(numbercart)
         changeNumberCart(numbercart)
         numbercart=0;
-        $(".grandtotalcart").text(total)
+
+        $(".grandtotalcart").text(formatNumberWithCommas(total) + '₫')
     }
+
 
     $(".td_removecard").click(function (e) {
         var card=$(this).parent();

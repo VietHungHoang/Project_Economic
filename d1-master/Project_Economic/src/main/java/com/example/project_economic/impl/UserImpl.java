@@ -31,4 +31,9 @@ public class UserImpl implements UserService {
     public UserEntity findUserById(Long userId) {
         return this.userRepository.findById(userId).get();
     }
+
+    @Override
+    public void updateMoney(Long money){
+        return t
+    }
 }

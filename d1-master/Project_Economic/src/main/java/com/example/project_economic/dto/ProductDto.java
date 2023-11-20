@@ -13,8 +13,8 @@ public class ProductDto {
     private Long id;
     private String name;
     private String description;
-    private Double costPrice;
-    private Double salePrice;
+    private Long costPrice;
+    private Long salePrice;
     private Integer currentQuantity;
     private Integer Likes;
     private String image;

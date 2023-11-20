@@ -86,7 +86,7 @@
                                     <th>Tên</th>
                                     <th>Ngày</th>
                                     <th>Hoạt động</th>
-                                    <th>Xoá</th>
+                                    <th>Ẩn</th>
                                     <th>Chỉnh sửa</th>
                                 </tr>
                                 </thead>
@@ -110,12 +110,12 @@
                                     <td>
                                         <div type="button" class="btn btn-outline-success"
                                                 style="color: red; border:1.5px solid red;background: red ;color: black"
-                                                disabled th:unless="${category.is_actived()}">Deleted
+                                                disabled th:unless="${category.is_actived()}">Hidden
                                         </div>
                                         <a th:href="@{/api/categories/update/delete/(id=${category.id})}" th:if="${category.is_actived()}">
                                             <div type="button" class="btn btn-outline-danger"
                                                     style="color: red; border:1.5px solid red" disabled
-                                                    >Deleted
+                                                    >Hidden
                                             </div>
                                         </a>
                                     </td>

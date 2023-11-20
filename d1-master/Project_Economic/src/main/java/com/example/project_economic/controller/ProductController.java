@@ -34,10 +34,10 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     List<Price>prices=List.of(
-            new Price(0,10),
-            new Price(10,50),
-            new Price(50,100),
-            new Price(100,500)
+            new Price(0,100000),
+            new Price(100000,200000),
+            new Price(200000,400000),
+            new Price(400000,1000000)
     );
     public List<CountProuductDto>countProuductDtos(){
         List<CountProuductDto>countProuductDtos=new ArrayList<>();

@@ -19,6 +19,6 @@ public class UserEntity {
     private String email;
     private String password;
     private String roles;
-    private Double totalMany=500.0;
-
+    private Long totalMany = 0l;
+    private String address;
 }

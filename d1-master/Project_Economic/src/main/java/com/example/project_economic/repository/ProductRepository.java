@@ -28,10 +28,10 @@ public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
     @Query(value = "select  count(product_id) from products where category_id=?1",nativeQuery = true)
     Integer countProductByCategory(Long id);
 
-    @Query(value = "select * from products where cost_price between ?1 and ?2 limit ?3 offset ?4",nativeQuery = true)
+    @Query(value = "select * from products where sale_price between ?1 and ?2 limit ?3 offset ?4",nativeQuery = true)
     List<ProductEntity>findAllProductByPriceAndPagination(int first_price,int second_price,int pageSize,int offsetNumber);
 
-    @Query(value = "select count(product_id) from products where cost_price between ?1 and ?2",nativeQuery = true)
+    @Query(value = "select count(product_id) from products where sale_price between ?1 and ?2",nativeQuery = true)
     Integer countProductByPrice(int first_price,int second_price);
 
     @Query(value = "select * from products where product_id in ?1",nativeQuery = true)

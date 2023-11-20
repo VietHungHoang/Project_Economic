@@ -26,7 +26,7 @@ public class CartItemEntity {
 
 
     private int quantity;
-    public Double totalInCartItem(){
-        return this.quantity*this.getProduct().getCostPrice();
+    public Long totalInCartItem(){
+        return this.quantity*this.getProduct().getSalePrice();
     }
 }

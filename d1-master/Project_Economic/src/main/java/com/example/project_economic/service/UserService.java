@@ -5,4 +5,7 @@ import com.example.project_economic.entity.UserEntity;
 public interface UserService {
     UserEntity createUser(UserEntity userEntity) throws Exception;
     UserEntity findUserById(Long userId);
+
+    void updateMoney(long money);
+    void updateAddress(String address);
 }

@@ -20,7 +20,7 @@ public class HistoryCartDto {
     private LocalDateTime BoughtAt;
 
     private Integer quantity;
-    private Double sumTotalInCartHistory(){
+    private Long sumTotalInCartHistory(){
         return this.quantity*this.productResponse.getCostPrice();
     }
 
