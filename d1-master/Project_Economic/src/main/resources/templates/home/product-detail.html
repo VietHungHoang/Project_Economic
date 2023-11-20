@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <meta charset="utf-8">
+        <title>E Store - Detail Product</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+        <!-- Favicon -->
+        <link th:href="@{/images/favicon.ico}" rel="icon">
+        <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+        <!--    <link href="/styles.css"/>-->
+        <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link th:href="@{/lib/slick/slick.css}" rel="stylesheet">
+        <link th:href="@{/lib/slick/slick-theme.css}" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link th:href="@{/css/stylehome.css}" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <div th:replace="home/index::header_home"></div>
+        <div style="height: 150px;"></div>
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Estore</a></li>
+                    <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+                    <li class="breadcrumb-item active">Chi tiết</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Product Detail Start -->
+        <div class="product-detail">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="product-detail-top">
+                            <div class="row align-items-center">
+                                <input type="hidden" th:value="${product.id}" class="productId_addToCart">
+                                <div class="col-md-5">
+                                    <div class="product-slider-single normal-slider">
+                                        <img th:src = "${product.getImage_url()}" alt="Product Image">
+                                        <img th:src = "${product.getImage_url()}" alt="Product Image">
+                                        <img th:src = "${product.getImage_url()}" alt="Product Image">
+                                        <img th:src = "${product.getImage_url()}" alt="Product Image">
+                                        <img th:src = "${product.getImage_url()}" alt="Product Image">
+                                        <img th:src = "${product.getImage_url()}" alt="Product Image">
+                                    </div>
+                                    <div class="product-slider-single-nav normal-slider">
+                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div th:if="${findProductInCart}">
+<!--                                        <h4 class="text-success">Products already in the cart</h4>-->
+                                        <h4 class="text-success">Sản phẩm đã có trong giỏ hàng</h4>
+                                    </div>
+                                    <div class="product-content">
+
+                                        <div class="title"><h2 th:text="${product.name}"></h2></div>
+                                        <div class="ratting">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="price">
+                                            <h4>Giá:</h4>
+                                            <p>$99 <span th:text="${product.costPrice}">$149</span></p>
+                                        </div>
+                                        <div class="quantity">
+                                            <h4>Số lượng:</h4>
+                                            <div class="qty">
+                                                <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                                <input type="text" value="1" class="inputquantity">
+                                                <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="p-size">
+                                            <h4>Kích thước:</h4>
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn">S</button>
+                                                <button type="button" class="btn">M</button>
+                                                <button type="button" class="btn">L</button>
+                                                <button type="button" class="btn">XL</button>
+                                            </div>
+                                        </div>
+                                        <div class="p-color">
+                                            <h4>Màu sắc:</h4>
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn">Trắng</button>
+                                                <button type="button" class="btn">Đen</button>
+                                                <button type="button" class="btn">Xanh</button>
+                                            </div>
+                                        </div>
+                                        <div class="action">
+                                            <button class="btn btnAddProductToCart" href="#"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+                                            <button class="btn" href="#"><i class="fa fa-shopping-bag"></i>Mua ngay</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row product-detail-bottom">
+                            <div class="col-lg-12">
+                                <ul class="nav nav-pills nav-justified">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="pill" href="#description">Mô tả sản phẩm</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="pill" href="#reviews">Đánh giá</a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div id="description" class="container tab-pane active">
+<!--                                        <h4>Product description</h4>-->
+                                        <p th:text="${product.getDescription()}">
+                                        </p>
+                                    </div>
+                                    <div  class="container ">
+                                        <h4>Nhận xét</h4>
+                                        <div id="box_comment_product">
+
+                                            <div th:each="comment:${comments}" id="chatbox" th:class="${'commentParent_'+comment.getId()}" th:style="'margin-left: ' + ${comment.getStep()*30} + 'px;'" >
+                                                <div class="boxmessage" style="display: flex;flex-direction: column;" id="usersendMessage" >
+                                                    <div class="avatar" id="avatarDiv" >
+                                                        <h4 th:text="${comment.getUserName()}" class="textUserName">HD</h4>
+                                                    </div>
+                                                    <div id="contentComent" role="alert" style="margin-top: 8px;" th:text="${comment.getContent()}">
+                                                        This is a primary alert—check it out! afadsfaddaadfad
+                                                    </div>
+                                                    <button th:onclick="showFormRepComment([[${comment.getId()}]])" style="width: max-content" class="btn1_repcomment">
+                                                        <h5>Rep</h5>
+                                                    </button>
+                                                    <div style="width: 100%;display: none" th:class="${'form-rep-comment'+comment.getId()}">
+                                                        <input name="comment" placeholder="Write a comment" th:id="${'textarea-comment-rep'+comment.getId()}"></input>
+                                                        <button type="submit" id="btn-comment-rep" th:onclick="postRepComment([[${comment.getId()}]])">Rep Comment</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="comment-form">
+                                            <div style="width: 100%">
+                                                <input name="comment" placeholder="Write a comment" id="textarea-comment"></input>
+                                                <button type="submit" id="btn-comment" th:onclick="postFirstCommentInPost([[${productId}]])">Comment</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Reviews -->
+                                    <div id="reviews" class="container tab-pane fade">
+                                        <div class="reviews-submitted">
+                                            <div class="reviewer">Phasellus Gravida - <span>01 Jan 2020</span></div>
+                                            <div class="ratting">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <p>
+                                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+                                            </p>
+                                        </div>
+                                        <div class="reviews-submit">
+                                            <h4>Give your Review:</h4>
+                                            <div class="ratting">
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                            </div>
+                                            <div class="row form">
+                                                <div class="col-sm-6">
+                                                    <input type="text" placeholder="Name">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="email" placeholder="Email">
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <textarea placeholder="Review"></textarea>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button>Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Side Bar Start -->
+                    <div class="col-lg-4 sidebar">
+                        <div class="sidebar-widget category">
+                            <h2 class="title">Danh mục</h2>
+                            <nav class="navbar bg-light">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item" th:each="category:${categories}">
+                                        <a class="nav-link" href="#" th:text="${category.getName()}">Fashion & Beauty 123</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <div class="sidebar-widget widget-slider">
+                            <div class="sidebar-slider normal-slider">
+                                <div class="col-md-4" th:each="product:${products}">
+                                    <div class="product-item">
+                                        <div class="product-title">
+                                            <a href="#" th:text="${product.getName()}"></a>4
+                                            <div class="ratting">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="product-image">
+                                            <a th:href="product-detail.html">
+                                                <img th:src="${product.getImage_url()}" alt="Product Image">
+                                            </a>
+                                            <div class="product-action">
+                                                <input type="hidden" th:value="${product.id}"/>
+                                                <a class="addproducttocard"><i class="fa fa-cart-plus"></i></a>
+                                                <a href="#"><i class="fa fa-heart"></i></a>
+                                                <a th:onclick="searchProductById([[${product.id}]])"><i class="fa fa-search"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="product-price">
+                                            <h3 th:text="${product.getCostPrice()}"><span>$</span>99</h3>
+                                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+<!--                                <div class="product-item">-->
+<!--                                    <div class="product-title">-->
+<!--                                        <a href="#">Product Name</a>-->
+<!--                                        <div class="ratting">-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product-image">-->
+<!--                                        <a th:href="product-detail.html">-->
+<!--                                            <img th:src="@{/images/product-7.jpg}" alt="Product Image">-->
+<!--                                        </a>-->
+<!--                                        <div class="product-action">-->
+<!--                                            <a href="#"><i class="fa fa-cart-plus"></i></a>-->
+<!--                                            <a href="#"><i class="fa fa-heart"></i></a>-->
+<!--                                            <a href="#"><i class="fa fa-search"></i></a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product-price">-->
+<!--                                        <h3><span>$</span>99</h3>-->
+<!--                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="product-item">-->
+<!--                                    <div class="product-title">-->
+<!--                                        <a href="#">Product Name</a>-->
+<!--                                        <div class="ratting">-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product-image">-->
+<!--                                        <a th:href="product-detail.html">-->
+<!--                                            <img th:src="@{/images/product-8.jpg}" alt="Product Image">-->
+<!--                                        </a>-->
+<!--                                        <div class="product-action">-->
+<!--                                            <a href="#"><i class="fa fa-cart-plus"></i></a>-->
+<!--                                            <a href="#"><i class="fa fa-heart"></i></a>-->
+<!--                                            <a href="#"><i class="fa fa-search"></i></a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product-price">-->
+<!--                                        <h3><span>$</span>99</h3>-->
+<!--                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="product-item">-->
+<!--                                    <div class="product-title">-->
+<!--                                        <a href="#">Product Name</a>-->
+<!--                                        <div class="ratting">-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product-image">-->
+<!--                                        <a th:href="product-detail.html">-->
+<!--                                            <img th:src="@{/images/product-9.jpg}" alt="Product Image">-->
+<!--                                        </a>-->
+<!--                                        <div class="product-action">-->
+<!--                                            <a href="#"><i class="fa fa-cart-plus"></i></a>-->
+<!--                                            <a href="#"><i class="fa fa-heart"></i></a>-->
+<!--                                            <a href="#"><i class="fa fa-search"></i></a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product-price">-->
+<!--                                        <h3><span>$</span>99</h3>-->
+<!--                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product Detail End -->
+
+        <!-- Footer Bottom Start -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 copyright">
+                        <p>Copyright &copy; Group 4.03</p>
+                    </div>
+
+                    <div class="col-md-6 template-by">
+                        <a href="https://portal.ptit.edu.vn/">Posts and Telecommunications Institute of Technology</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Back to Top -->
+
+        <!-- Back to Top -->
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script th:src="@{/lib/easing/easing.min.js}"></script>
+        <script th:src="@{/lib/slick/slick.min.js}"></script>
+
+        <!-- Template Javascript -->
+        <script th:src="@{/images/main.js}"></script>
+    <script th:inline="javascript">
+        getUserNameFromCookie()
+        const form = document.querySelector('.comment-form');
+        const textarea = form.querySelector('textarea');
+        const comments = document.querySelector('.comments');
+        const boxcomment=document.querySelector('.box_comment_product');
+        const userId=getUserId();
+        const productId=[[${product.id}]];
+        function getUserId(){
+            var cookies = document.cookie.split(';');
+            var userId='';
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.startsWith('userId=')) {
+                    userId = cookie.substring('userId='.length, cookie.length);
+                    break;
+                }
+            }
+            return userId;
+        }
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            //create div
+            const comment = document.createElement('div');
+            comment.classList.add('comment');
+            const text = document.createElement('p');
+            text.textContent = textarea.value;
+            //
+            comment.appendChild(text);
+            boxcomment.appendChild(comment);
+            console.log(text)
+            textarea.value = '';
+        });
+        connect();
+        setCurrentProduct([[${product.id}]])
+    </script>
+    </body>
+</html>
