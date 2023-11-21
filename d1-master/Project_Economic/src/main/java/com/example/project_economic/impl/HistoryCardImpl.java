@@ -41,7 +41,7 @@ public class HistoryCardImpl implements HistoryCardService {
     public void addProductToHistoryCard(Long userId) throws Money {
         UserEntity user=this.userRepository.findById(userId).get();
         List<CartItemEntity> cartItemEntities=this.cartItemRepository.findByUser(user);
-        Double totalMany=0.0;
+        Long totalMany = 0l;
         for(CartItemEntity cartItem:cartItemEntities){
             totalMany+=cartItem.totalInCartItem();
         }

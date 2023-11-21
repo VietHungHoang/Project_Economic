@@ -67,7 +67,7 @@ public class ProductController {
             model.addAttribute("error", "error");
         }
         model.addAttribute("countProductByCategory",this.countProuductDtos());
-//        model.addAttribute("countProductByCategory",this.productService.countProductByCategoryId());
+        model.addAttribute("countProductByCategory",this.productService.countProductByCategoryId());
         model.addAttribute("categories", this.categoryService.findAll());
         model.addAttribute("product", new ProductDto());
         model.addAttribute("allproducts", this.productService.findAll());

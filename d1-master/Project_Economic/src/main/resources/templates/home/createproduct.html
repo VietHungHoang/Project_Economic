@@ -137,7 +137,7 @@
                         </form>
 
                     </div>
-                    <h2 th:class="p-4">All products</h2>
+                    <h2 th:class="p-4">Tất cả sản phẩm</h2>
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead class="thead-dark">
@@ -209,19 +209,19 @@
                 <div class="checkout-inner">
                     <div class="checkout-summary">
                         <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Cagory</th>
-                            <th scope="col">Number Product</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="count:${countProductByCategory}">
-                            <th scope="row" th:text="${categories.get(count.getCategoryId()-1).getName()}"></th>
-                            <td th:text="${count.getCount()}">Mark</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                            <thead>
+                            <tr>
+                                <th scope="col">Cagory</th>
+                                <th scope="col">Number Product</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="count:${countProductByCategory}">
+                                <th scope="row" th:text="${categories.get(count.getCategoryId()-1).getName()}"></th>
+                                <td th:text="${count.getCount()}">Mark</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

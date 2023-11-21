@@ -19,10 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -127,6 +124,20 @@ public class UserController {
         model.addAttribute("numbercart",this.cartItemService.countCart(((UserInfoDetails)(authentication.getPrincipal())).getUserId()));
         return "home/product-list";
     }
+
+//    @PostMapping("/update/")
+//    public String updateCategory(@ModelAttribute("address") String addressUpdate, Model model){
+//        CategoryEntity categoryEntity1=new CategoryEntity(categoryEntity.getName());
+//
+//        try{
+//            CategoryEntity categoryEntitySave=this.categoryService.save(categoryEntity1);
+//
+//        }catch (Exception exception){
+//            model.addAttribute("error","error");
+//        }
+//        model.addAttribute("allcategories",this.categoryService.findAll());
+//        return "home/addnew";
+//    }
     public List<ProductResponse>findByAllProductActive(){
         return this.productService.findAllIsActived();
     }
