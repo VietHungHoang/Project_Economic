@@ -6,11 +6,9 @@ import com.example.project_economic.entity.CategoryEntity;
 import com.example.project_economic.entity.UserEntity;
 import com.example.project_economic.jwt.JwtService;
 import com.example.project_economic.response.ProductResponse;
-import com.example.project_economic.service.CartItemService;
-import com.example.project_economic.service.CategoryService;
-import com.example.project_economic.service.ProductService;
-import com.example.project_economic.service.UserService;
+import com.example.project_economic.service.*;
 import jakarta.servlet.http.HttpSession;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,6 +37,8 @@ public class UserController {
     private ProductService productService;
     @Autowired
     private CartItemService cartItemService;
+
+    private HistoryCardService historyCardService;
     @GetMapping("/index")
     public String welcomePage(){
         return "index";
@@ -125,19 +125,6 @@ public class UserController {
         return "home/product-list";
     }
 
-//    @PostMapping("/update/")
-//    public String updateCategory(@ModelAttribute("address") String addressUpdate, Model model){
-//        CategoryEntity categoryEntity1=new CategoryEntity(categoryEntity.getName());
-//
-//        try{
-//            CategoryEntity categoryEntitySave=this.categoryService.save(categoryEntity1);
-//
-//        }catch (Exception exception){
-//            model.addAttribute("error","error");
-//        }
-//        model.addAttribute("allcategories",this.categoryService.findAll());
-//        return "home/addnew";
-//    }
     public List<ProductResponse>findByAllProductActive(){
         return this.productService.findAllIsActived();
     }

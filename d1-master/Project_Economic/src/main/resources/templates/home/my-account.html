@@ -92,16 +92,12 @@
                                     <div class="col-md-6">
                                         <input class="form-control" type="text" th:placeholder="${user.getEmail()}">
                                     </div>
-<!--                                    <div class="col-md-6">-->
-<!--                                        <input class="form-control" type="text" th:placeholder="${user.getAddress()}">-->
-<!--                                    </div>-->
-<!--                                    <form th:action="@{api/}">-->
-                                        <div class="col-md-6">
-                                            <input class="form-control" type="text" th:placeholder="${user.getAddress() != null ? user.getAddress() : 'Địa chỉ'}">
-                                        </div>
-                                    </form>
+                                <div class="col-md-6">
+                                    <input class="form-control" type="text" th:placeholder="${user.getAddress() != null ?
+                                            user.getAddress() : 'Địa chỉ'}">
+                                    </div>
                                     <div class="col-md-12">
-                                        <button class="btn">Cập nhật</button>
+                                        <button type = "submit" class="btn btn-success mt-4">Cập nhật</button>
                                         <br><br>
                                     </div>
                                 </div>

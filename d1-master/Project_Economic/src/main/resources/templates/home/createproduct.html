@@ -30,7 +30,6 @@
     <div class="container-fluid">
         <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Estore</a></li>
-            <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
             <li class="breadcrumb-item active">Tạo sản phẩm</li>
         </ul>
     </div>
@@ -46,7 +45,7 @@
                     <button type="button" class="btn btn-primary mb-2 btn_showformcreateproduct">Tạo sản phẩm</button>
                     <div class="billing-address col align-items-center " th:class="formcreateproduct"
                          style="display: none">
-                        <h2>Tạo sản phẩm</h2>
+                        <h2>Thông tin sản phẩm</h2>
                         <form class="col pl-0" th:action="@{/api/products/create}" method="post"
                               th:object="${product}" enctype="multipart/form-data">
                             <div class="col-md-6">
@@ -54,23 +53,23 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input class="form-control" placeholder="Description"
+                                    <input class="form-control" placeholder="Mô tả"
                                            th:field="*{description}"></input>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Price" th:field="*{costPrice}">
+                                <input class="form-control" type="text" placeholder="Giá gốc" th:field="*{costPrice}">
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Sale price"
+                                <input class="form-control" type="text" placeholder="Giá sale"
                                        th:field="*{salePrice}">
                             </div>
                             <div class="col-md-12">
-                                <input class="form-control w-50" type="number" placeholder="Quantity"
+                                <input class="form-control w-50" type="number" placeholder="Số lượng"
                                        th:field="*{currentQuantity}">
                             </div>
                             <div class="col-md-6">
-                                <label>Category</label>
+                                <label>Danh mục</label>
                                 <select class="custom-select" th:field="*{categoryId}">
                                     <option selected th:text="${categories.get(0).getName()}"
                                             th:value="${categories.get(0).id}"></option>
@@ -79,20 +78,20 @@
                                     </option>
                                 </select>
                             </div>
+<!--                            <div class="col-md-6">-->
+<!--                                <input class="form-control" type="text" placeholder="Image name" th:field="*{image}">-->
+<!--                            </div>-->
                             <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Image name" th:field="*{image}">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Choose file image</label>
+                                <label>Chọn ảnh</label>
                                 <input type="file" name="imageProduct" id="imageProduct">
                             </div>
-                            <button type="submit" class="btn btn-success mt-4">Create</button>
+                            <button type="submit" class="btn btn-success mt-4">Tạo</button>
                         </form>
 
                     </div>
                     <div class="billing-address col align-items-center " th:class="formeditproduct"
                          th:if="${showformedit}">
-                        <h2>Edit product</h2>
+                        <h2>Chỉnh sửa sản phẩm</h2>
                         <form class="col pl-0"  method="post" th:action="@{/api/products/edit/(id=${productEdit.id})}"
                               th:object="${product}" enctype="multipart/form-data">
                             <div class="col-md-6">
@@ -116,7 +115,7 @@
                                        th:field="*{currentQuantity}">
                             </div>
                             <div class="col-md-6">
-                                <label>Category</label>
+                                <label>Danh mục</label>
                                 <select class="custom-select" th:field="*{categoryId}">
                                     <option selected th:text="${productEdit.getCategoryEntity().getName()}"
                                             th:value="${categories.get(0).id}"></option>
@@ -125,15 +124,15 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Image name" th:field="*{image}">
-                            </div>
+<!--                            <div class="col-md-6">-->
+<!--                                <input class="form-control" type="text" placeholder="Image name" th:field="*{image}">-->
+<!--                            </div>-->
                             <img th:src = "${productEdit.getImage_url()}" style="width: 50px;height: 50px">
                             <div class="col-md-6">
-                                <label>Choose file image</label>
+                                <label>Chọn ảnh</label>
                                 <input type="file" name="imageProduct">
                             </div>
-                            <button type="submit" class="btn btn-success mt-4">Update</button>
+                            <button type="submit" class="btn btn-success mt-4">Cập nhật</button>
                         </form>
 
                     </div>
@@ -159,9 +158,10 @@
                             <tr th:each="product,index:${allproducts}">
                                 <td th:text="${index.count}"></td>
                                 <td th:text="${product.getName()}"></td>
-                                <td th:text="${product.getDescription()}"></td>
-                                <td th:text="${product.getCostPrice()}"></td>
-                                <td th:text="${product.getSalePrice()}"></td>
+<!--                                <td th:text="${product.getDescription()}"></td>-->
+                                <td></td>
+                                <td th:text="${product.getCostPriceFormat()}"></td>
+                                <td th:text="${product.getSalePriceFormat()}"></td>
                                 <td >
                                     <img th:src = "${product.getImage_url()}" style="width: 50px;height: 50px"/>
                                 </td>
@@ -184,12 +184,12 @@
                                     <div type="button" class="btn btn-outline-success"
                                          style="color: red; border:1.5px solid red;background: red ;color: black"
                                          th:if="${!product.is_actived}"
-                                    >Deleted
+                                    >Hidden
                                     </div>
                                     <a th:if="${product.is_actived}" th:href="@{/api/products/delete/(id=${product.getId()})}">
                                         <div type="button" class="btn btn-outline-danger"
                                              style="color: red; border:1.5px solid red" disabled
-                                        >Deleted
+                                        >Hidden
                                         </div>
                                     </a>
                                 </td>
@@ -211,8 +211,8 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">Cagory</th>
-                                <th scope="col">Number Product</th>
+                                <th scope="col">Danh mục</th>
+                                <th scope="col">Số lượng sản phẩm</th>
                             </tr>
                             </thead>
                             <tbody>

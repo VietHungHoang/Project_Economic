@@ -100,8 +100,8 @@
                                 </div>
                             </div>
                             <div class="product-price">
-                                <h3 th:text="${product.getSalePriceFormat()} + '₫'"></h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                <h3 th:text="${product.getSalePriceFormat()}"></h3>
+                                <a class="btn" href=""><i class="fa fa-shopping-cart" onclick="buy_product()"></i>Mua ngay</a>
                             </div>
                         </div>
                     </div>
@@ -246,7 +246,7 @@
                                 </div>
                             </div>
                             <div class="product-price">
-                                <h3 th:text="${product.getSalePriceFormat()} + '₫'"><span>$</span>99</h3>
+                                <h3 th:text="${product.getSalePriceFormat()}"><span>$</span>99</h3>
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua ngay</a>
                             </div>
                         </div>
@@ -307,6 +307,35 @@
     function  getUrlToPrices(firstPrice,secondPrice){
         window.location.href = 'http://localhost:3000/api/products/prices/?firstPrice=' + firstPrice +'&secondPrice='+secondPrice+ '&pageNumber=' + 1;
         return false;
+    }
+
+    function buy_product(){
+        var userId = ''
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.startsWith('userId=')) {
+                userId = cookie.substring('userId='.length, cookie.length);
+                break;
+            }
+        }
+        var url="/api/history/add/"+userId;
+        $.ajax({
+            type:"POST",
+            url:url,
+            success:function (res){
+                console.log(res);
+                if(res=="add fail"){
+
+                }else{
+                    removeAll_list_cartItem()
+                }
+            },
+            error:function (xhr,status,error){
+
+            }
+        })
+
     }
 
     function  getUrlPriceAndPagination(pageNumber){

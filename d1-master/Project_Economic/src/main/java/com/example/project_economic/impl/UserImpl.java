@@ -1,5 +1,6 @@
 package com.example.project_economic.impl;
 
+import com.example.project_economic.entity.CategoryEntity;
 import com.example.project_economic.entity.ProductEntity;
 import com.example.project_economic.entity.UserEntity;
 import com.example.project_economic.repository.UserRepository;
@@ -31,19 +32,5 @@ public class UserImpl implements UserService {
     @Override
     public UserEntity findUserById(Long userId) {
         return this.userRepository.findById(userId).get();
-    }
-
-    @Override
-    public void updateMoney(Long userId, Long money){
-        UserEntity userEntity = this.userRepository.findById(userId).get();
-        userEntity.setTotalMany(userEntity.getTotalMany() + money);
-        this.userRepository.save(userEntity);
-    }
-
-    @Override
-    public void updateAddress(Long userId, String address){
-        UserEntity userEntity = this.userRepository.findById(userId).get();
-        userEntity.setAddress(address);
-        this.userRepository.save(userEntity);
     }
 }

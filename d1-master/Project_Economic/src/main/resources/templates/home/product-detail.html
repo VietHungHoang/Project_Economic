@@ -52,7 +52,6 @@
                                         <img th:src = "${product.getImage_url()}" alt="Product Image">
                                         <img th:src = "${product.getImage_url()}" alt="Product Image">
                                         <img th:src = "${product.getImage_url()}" alt="Product Image">
-                                        <img th:src = "${product.getImage_url()}" alt="Product Image">
                                     </div>
                                     <div class="product-slider-single-nav normal-slider">
                                         <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
@@ -80,8 +79,10 @@
                                         </div>
                                         <div class="price">
                                             <h4>Giá:</h4>
-                                            <p>$99 <span th:text="${product.costPrice}">$149</span></p>
+                                            <p th:text="${product.getSalePriceFormat()}"></p>
+                                                <span th:text="${product.getCostPriceFormat()}">$149</span>
                                         </div>
+
                                         <div class="quantity">
                                             <h4>Số lượng:</h4>
                                             <div class="qty">
@@ -144,9 +145,9 @@
                                                     <div id="contentComent" role="alert" style="margin-top: 8px;" th:text="${comment.getContent()}">
                                                         This is a primary alert—check it out! afadsfaddaadfad
                                                     </div>
-                                                    <button th:onclick="showFormRepComment([[${comment.getId()}]])" style="width: max-content" class="btn1_repcomment">
-                                                        <h5>Rep</h5>
-                                                    </button>
+<!--                                                    <button th:onclick="showFormRepComment([[${comment.getId()}]])" style="width: max-content" class="btn1_repcomment">-->
+<!--                                                        <h5>Rep</h5>-->
+<!--                                                    </button>-->
                                                     <div style="width: 100%;display: none" th:class="${'form-rep-comment'+comment.getId()}">
                                                         <input name="comment" placeholder="Write a comment" th:id="${'textarea-comment-rep'+comment.getId()}"></input>
                                                         <button type="submit" id="btn-comment-rep" th:onclick="postRepComment([[${comment.getId()}]])">Rep Comment</button>
@@ -186,12 +187,12 @@
                                                 <i class="far fa-star"></i>
                                             </div>
                                             <div class="row form">
-                                                <div class="col-sm-6">
-                                                    <input type="text" placeholder="Name">
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <input type="email" placeholder="Email">
-                                                </div>
+<!--                                                <div class="col-sm-6">-->
+<!--                                                    <input type="text" placeholder="Name">-->
+<!--                                                </div>-->
+<!--                                                <div class="col-sm-6">-->
+<!--                                                    <input type="email" placeholder="Email">-->
+<!--                                                </div>-->
                                                 <div class="col-sm-12">
                                                     <textarea placeholder="Review"></textarea>
                                                 </div>
@@ -245,7 +246,7 @@
                                             </div>
                                         </div>
                                         <div class="product-price">
-                                            <h3 th:text="${product.getCostPrice()}"><span>$</span>99</h3>
+                                            <h3 th:text="${product.getSalePriceFormat()}"><span>$</span>99</h3>
                                             <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                                         </div>
                                     </div>

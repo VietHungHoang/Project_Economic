@@ -6,6 +6,4 @@ public interface UserService {
     UserEntity createUser(UserEntity userEntity) throws Exception;
     UserEntity findUserById(Long userId);
 
-    void updateMoney(Long userId, Long money);
-    void updateAddress(Long UserId, String address);
 }

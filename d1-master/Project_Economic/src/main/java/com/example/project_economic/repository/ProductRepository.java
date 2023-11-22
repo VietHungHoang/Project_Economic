@@ -22,13 +22,13 @@ public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
     @Query(value = "select count(product_id) from products where name like ?1",nativeQuery = true)
     Integer countProductByKeyword(String keyword);
 
-    @Query(value = "select * from products where category_id=?1 limit ?2 offset ?3 ",nativeQuery = true)
+    @Query(value = "select * from products where is_actived=true and category_id=?1 limit ?2 offset ?3  ",nativeQuery = true)
     List<ProductEntity>findAllProductByCategory(Long id,int pageSize,int offsetNumber);
 
     @Query(value = "select  count(product_id) from products where category_id=?1",nativeQuery = true)
     Integer countProductByCategory(Long id);
 
-    @Query(value = "select * from products where sale_price between ?1 and ?2 limit ?3 offset ?4",nativeQuery = true)
+    @Query(value = "select * from products where is_actived = true and sale_price between ?1 and ?2 limit ?3 offset ?4",nativeQuery = true)
     List<ProductEntity>findAllProductByPriceAndPagination(int first_price,int second_price,int pageSize,int offsetNumber);
 
     @Query(value = "select count(product_id) from products where sale_price between ?1 and ?2",nativeQuery = true)

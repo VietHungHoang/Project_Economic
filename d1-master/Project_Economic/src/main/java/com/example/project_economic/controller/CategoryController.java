@@ -61,7 +61,4 @@ public class CategoryController {
         model.addAttribute("category",new CategoryEntity());
         return "home/addnew";
     }
-
-//    @GetMapping("http://localhost:3000/api/productdetail/{userId}/{productId}")
-//    public String
 }

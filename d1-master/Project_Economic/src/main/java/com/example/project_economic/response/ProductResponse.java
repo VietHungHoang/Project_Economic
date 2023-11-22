@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.text.DecimalFormat;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,7 +33,17 @@ public class ProductResponse {
             if (Character.isDigit(currentChar) && i > 0 && (formattedNumber.length() - i) % 3 == 0) result.append('.');
             result.append(currentChar);
         }
-        System.out.println(result.toString());
-        return result.toString();
+        return result.toString() + '₫';
+    }
+
+    public String getCostPriceFormat(){
+        String formattedNumber = this.costPrice.toString();
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < formattedNumber.length(); i++) {
+            char currentChar = formattedNumber.charAt(i);
+            if (Character.isDigit(currentChar) && i > 0 && (formattedNumber.length() - i) % 3 == 0) result.append('.');
+            result.append(currentChar);
+        }
+        return result.toString() + '₫';
     }
 }

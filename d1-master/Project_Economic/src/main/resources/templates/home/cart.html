@@ -9,7 +9,6 @@
     <div class="container-fluid">
         <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Estore</a></li>
-            <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
             <li class="breadcrumb-item active">Giỏ hàng</li>
         </ul>
     </div>
@@ -41,7 +40,7 @@
                                         <p th:text="${cartITem.getProductResponse().name}"></p>
                                     </div>
                                 </td>
-                                <td th:text="${cartITem.getProductResponse().getSalePriceFormat()} + '₫'"></td>
+                                <td th:text="${cartITem.getProductResponse().getSalePriceFormat()}"></td>
                                 <td>
                                     <div class="qtyincart">
                                         <button class="btn-minus"><i class="fa fa-minus"></i></button>
@@ -77,7 +76,7 @@
                         <div class="col-md-12">
                             <div class="cart-summary">
                                 <div class="cart-content">
-                                    <h2>Tổng<span class="grandtotalcart">$100</span></h2>
+                                    <h2>Tổng<span class="grandtotalcart"></span></h2>
                                 </div>
                                 <div class="cart-btn">
                                     <button onclick="buy_product()">Mua ngay</button>
