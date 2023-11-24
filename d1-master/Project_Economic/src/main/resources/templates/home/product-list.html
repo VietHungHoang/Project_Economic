@@ -240,9 +240,10 @@
                                     <img th:src="${product.getImage_url()}" alt="Product Image">
                                 </a>
                                 <div class="product-action">
-                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <input type="hidden" th:value="${product.id}"/>
+                                    <a class="addproducttocard"><i class="fa fa-cart-plus"></i></a>
                                     <a href="#"><i class="fa fa-heart"></i></a>
-                                    <a href="#"><i class="fa fa-search"></i></a>
+                                    <a th:onclick="searchProductById([[${product.id}]])"><i class="fa fa-search"></i></a>
                                 </div>
                             </div>
                             <div class="product-price">
