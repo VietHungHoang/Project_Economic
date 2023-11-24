@@ -3,6 +3,7 @@ package com.example.project_economic.controller;
 import com.example.project_economic.entity.CartItemEntity;
 import com.example.project_economic.response.CartItemResponse;
 import com.example.project_economic.service.CartItemService;
+import com.example.project_economic.service.EmailSenderService;
 import com.example.project_economic.service.HistoryCardService;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +15,12 @@ import java.util.stream.Collectors;
 public class HistoryCardController {
     private final HistoryCardService historyCardService;
     private final CartItemService cartItemService;
+    private final EmailSenderService emailSenderService;
 
-    public HistoryCardController(HistoryCardService historyCardService, CartItemService cartItemService) {
+    public HistoryCardController(HistoryCardService historyCardService, CartItemService cartItemService, EmailSenderService emailSenderService) {
         this.historyCardService = historyCardService;
         this.cartItemService = cartItemService;
+        this.emailSenderService = emailSenderService;
     }
 
     @PostMapping("/add/{userId}")
@@ -28,6 +31,7 @@ public class HistoryCardController {
                 return cart.getProductResponse().getId();
             }).collect(Collectors.toList());
             this.historyCardService.addProductToHistoryCard(userId);
+            this.emailSenderService.sendEmail(userId);
             this.cartItemService.deleteAllCartByUserId(userId);
             return "add success";
         }catch (Exception e){

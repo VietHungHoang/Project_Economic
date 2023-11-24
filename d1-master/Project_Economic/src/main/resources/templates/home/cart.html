@@ -80,7 +80,6 @@
                                 </div>
                                 <div class="cart-btn">
                                     <button onclick="buy_product()">Mua ngay</button>
-<!--                                    <button class = "abcx">Mua ngayyyyyyyy</button>-->
                                 </div>
                             </div>
                         </div>
@@ -224,12 +223,17 @@
 
             }
         })
+
     }
+
     function removeAll_list_cartItem(){
         document.querySelectorAll(".list_cartItem").forEach((item)=>{
             item.remove();
         });
     }
+
+
+
     getUserNameFromCookie()
 </script>
 </html>
