@@ -1,6 +1,7 @@
 package com.example.project_economic.controller;
 
 
+import com.example.project_economic.entity.UserEntity;
 import com.example.project_economic.service.HistoryCardService;
 import com.example.project_economic.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ public class HistoryFormController {
     public String showPageHistory(Model model, @PathVariable Long userId){
         model.addAttribute("history_card",this.historyCardService.findByUserId(userId));
         model.addAttribute("user",this.userService.findUserById(userId));
+        model.addAttribute("users", new UserEntity());
         return "home/my-account";
     }
 }

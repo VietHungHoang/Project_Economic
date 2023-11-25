@@ -28,7 +28,7 @@ public class HistoryCard {
 
     private Boolean Received=false;
 
-    private LocalDateTime BoughtAt;
+    private String BoughtAt;
 
     private Integer quantity;
 

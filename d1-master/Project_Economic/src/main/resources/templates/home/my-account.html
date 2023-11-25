@@ -83,66 +83,81 @@
 <!--                            <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">-->
 
 <!--                            </div>-->
-                            <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
+                            <form class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav"
+                                  th:action="@{/api/users/update/(id=${user.id})}" method="post" th:object="${users}">
                                 <h4>Thay đổi thông tin</h4>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input class="form-control" type="text" th:placeholder="${user.getUsername()}">
+                                        <input class="form-control" type="text" th:placeholder="${user.getUsername()}" th:field="*{username}">
                                     </div>
                                     <div class="col-md-6">
-                                        <input class="form-control" type="text" th:placeholder="${user.getEmail()}">
+                                        <input class="form-control" type="text" th:placeholder="${user.getEmail()}" th:field="*{email}">
                                     </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <input class="form-control" type="text" th:placeholder="${user.getAddress() != null ?
-                                            user.getAddress() : 'Địa chỉ'}">
+                                            user.getAddress() : 'Địa chỉ'}" th:field="*{address}">
                                     </div>
                                     <div class="col-md-12">
-                                        <button type = "submit" class="btn btn-success mt-4">Cập nhật</button>
+                                        <button class="btn" type="submit">Cập nhật</button>
                                         <br><br>
                                     </div>
                                 </div>
-                                <h4>Đổi mật khẩu</h4>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input class="form-control" type="text" placeholder="Mật khẩu hiện tại">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Mật khẩu mới">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Nhập lại mật khẩu">
-                                    </div>
-                                    <div class="col-md-12">
-                                        <button class="btn">Lưu thay đổi</button>
-                                        <br><br>
-                                    </div>
-                                </div>
-                                <h4>Nạp tiền</h4>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Tên ngân hàng">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Số tài khoản">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Số tiền cần nạp">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" th:placeholder="'Tổng số tiền còn lại: ' + ${user.getTotalMany() + '₫'}">
-                                    </div>
-                                    <div class="col-md-12">
-                                        <button class="btn">Cập nhật</button>
-                                        <br><br>
-                                    </div>
-                                </div>
+                            </form>
+<!--                                <h4>Đổi mật khẩu</h4>-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-md-12">-->
+<!--                                        <input class="form-control" type="text" placeholder="Mật khẩu hiện tại">-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-6">-->
+<!--                                        <input class="form-control" type="text" placeholder="Mật khẩu mới">-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-6">-->
+<!--                                        <input class="form-control" type="text" placeholder="Nhập lại mật khẩu">-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-12">-->
+<!--                                        <button class="btn">Lưu thay đổi</button>-->
+<!--                                        <br><br>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <h4>Nạp tiền</h4>-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-md-6">-->
+<!--                                        <input class="form-control" type="text" placeholder="Tên ngân hàng">-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-6">-->
+<!--                                        <input class="form-control" type="text" placeholder="Số tài khoản">-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-6">-->
+<!--                                        <input class="form-control" type="text" placeholder="Số tiền cần nạp">-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-6">-->
+<!--                                        <input class="form-control" type="text" th:placeholder="'Tổng số tiền còn lại: ' + ${user.getTotalMany() + '₫'}">-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-12">-->
+<!--                                        <button class="btn">Cập nhật</button>-->
+<!--                                        <br><br>-->
+<!--                                    </div>-->
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    <!-- Footer Bottom Start -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 copyright">
+                    <p>Copyright &copy; Group 4.03</p>
+                </div>
 
+                <div class="col-md-6 template-by">
+                    <a href="https://portal.ptit.edu.vn/">Posts and Telecommunications Institute of Technology</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script th:src="@{/lib/easing/easing.min.js}"></script>

@@ -4,7 +4,6 @@ import com.example.project_economic.dto.HistoryCartDto;
 import com.example.project_economic.entity.CartItemEntity;
 import com.example.project_economic.entity.HistoryCard;
 import com.example.project_economic.entity.UserEntity;
-import com.example.project_economic.exception.Money;
 import com.example.project_economic.repository.CartItemRepository;
 import com.example.project_economic.repository.HistoryCardRepository;
 import com.example.project_economic.repository.ProductRepository;
@@ -12,8 +11,8 @@ import com.example.project_economic.repository.UserRepository;
 import com.example.project_economic.service.HistoryCardService;
 import com.example.project_economic.utils.ProductUtils;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,30 +37,22 @@ public class HistoryCardImpl implements HistoryCardService {
 
 
     @Override
-    public void addProductToHistoryCard(Long userId) throws Money {
+    public void addProductToHistoryCard(Long userId){
+        DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("HH:mm:ss,dd/MM/yyyy");
+
         UserEntity user=this.userRepository.findById(userId).get();
         List<CartItemEntity> cartItemEntities=this.cartItemRepository.findByUser(user);
-        Long totalMany = 0l;
-        for(CartItemEntity cartItem:cartItemEntities){
-            totalMany+=cartItem.totalInCartItem();
-        }
-        if(totalMany>user.getTotalMany()){
-            throw new Money("not enough money");
-        }
-        user.setTotalMany(user.getTotalMany()-totalMany);
-        userRepository.save(user);
         for (CartItemEntity cartItem:cartItemEntities) {
             HistoryCard historyCard=HistoryCard.builder()
                     .quantity(cartItem.getQuantity())
                     .product(cartItem.getProduct())
                     .Received(false)
-                    .BoughtAt(LocalDateTime.now())
+                    .BoughtAt(dateTimeFormatter.format(LocalDateTime.now()))
                     .user(user)
                     .build();
             this.historyCardRepository.save(historyCard);
         }
     }
-
     @Override
     public List<HistoryCartDto> findByUserId(Long userId) {
         List<HistoryCard> historyCards=this.historyCardRepository.findByUser(

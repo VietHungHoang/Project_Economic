@@ -2424,3 +2424,91 @@ h2 {
 .comment-form button:hover {
     background-color: #166fe5;
 }
+
+/*.p-size {*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*.size-options label {*/
+/*    display: inline-block;*/
+/*    margin-right: 10px;*/
+/*    padding: 8px 12px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.size-options input:checked + label {*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.p-color {*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*.abc label {*/
+/*    display: inline-block;*/
+/*    margin-right: 10px;*/
+/*    padding: 8px 12px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.abc input:checked + label {*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*}*/
+
+/* Style for the size container */
+.p-size {
+    margin-bottom: 20px;
+}
+
+/* Style for the size options */
+.size-options label {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Style for the icon inside the size options */
+.size-options i {
+    margin-right: 5px;
+}
+
+/* Style for the selected size */
+.size-options input:checked + label {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Style for the color container */
+.p-color {
+    margin-bottom: 20px;
+}
+
+/* Style for the color options */
+.abc label {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Style for the icon inside the color options */
+.abc i {
+    margin-right: 5px;
+}
+
+/* Style for the selected color */
+.abc input:checked + label {
+    background-color: #007bff;
+    color: #fff;
+}

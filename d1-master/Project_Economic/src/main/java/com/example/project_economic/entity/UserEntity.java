@@ -19,6 +19,5 @@ public class UserEntity {
     private String email;
     private String password;
     private String roles;
-    private Long totalMany = 500000l;
     private String address;
 }

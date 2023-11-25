@@ -37,8 +37,9 @@ public class UserController {
     private ProductService productService;
     @Autowired
     private CartItemService cartItemService;
-
+    @Autowired
     private HistoryCardService historyCardService;
+
     @GetMapping("/index")
     public String welcomePage(){
         return "index";
@@ -88,10 +89,10 @@ public class UserController {
 //            }
 
         }catch (Exception exception){
-            model.addAttribute("error","Username or password is valid!");
+            model.addAttribute("error","Sai tài khoản hoặc mật khẩu!");
             return "login/index";
         }
-        model.addAttribute("error","Username or password is valid!");
+        model.addAttribute("error","Sai tài khoản hoặc mật khẩu!");
         return "login/index";
     }
     @GetMapping("/fail")
@@ -124,6 +125,22 @@ public class UserController {
         model.addAttribute("numbercart",this.cartItemService.countCart(((UserInfoDetails)(authentication.getPrincipal())).getUserId()));
         return "home/product-list";
     }
+    @PostMapping("/update/")
+    public String updateUser(@ModelAttribute("users") UserEntity userEntity, @RequestParam("id") Long userId, Model model){
+        try{
+            this.userService.update(userEntity, userId);
+            model.addAttribute("users",new UserEntity());
+        }catch (Exception exception){
+            model.addAttribute("error","error");
+        }
+        model.addAttribute("history_card",this.historyCardService.findByUserId(userId));
+        model.addAttribute("user",this.userService.findUserById(userId));
+        return "home/my-account";
+    }
+//    @PostMapping("/recovery/")
+//    public String recoveryPassword(@ModelAttribute("userEntity") UserEntity userEntity, Model model){
+//
+//    }
 
     public List<ProductResponse>findByAllProductActive(){
         return this.productService.findAllIsActived();
