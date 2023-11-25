@@ -5,6 +5,7 @@ import com.example.project_economic.response.CartItemResponse;
 import com.example.project_economic.service.CartItemService;
 import com.example.project_economic.service.EmailSenderService;
 import com.example.project_economic.service.HistoryCardService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,16 +13,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api/history")
+@RequiredArgsConstructor
 public class HistoryCardController {
     private final HistoryCardService historyCardService;
     private final CartItemService cartItemService;
     private final EmailSenderService emailSenderService;
-
-    public HistoryCardController(HistoryCardService historyCardService, CartItemService cartItemService, EmailSenderService emailSenderService) {
-        this.historyCardService = historyCardService;
-        this.cartItemService = cartItemService;
-        this.emailSenderService = emailSenderService;
-    }
 
     @PostMapping("/add/{userId}")
     public String addProductToHistoryCard(@PathVariable Long userId){

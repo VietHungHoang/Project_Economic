@@ -27,6 +27,8 @@ public class ProductEntity {
     private Integer Likes;
     private String image;
     private String image_type;
+    private String size;
+    private String color;
 
     @Lob
     @Column(name = "data",columnDefinition = "LONGBLOB")

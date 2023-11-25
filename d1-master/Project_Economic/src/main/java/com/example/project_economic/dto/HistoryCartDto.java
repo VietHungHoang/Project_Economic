@@ -17,7 +17,7 @@ public class HistoryCartDto {
     private ProductResponse productResponse;
     private Boolean Received=false;
 
-    private LocalDateTime BoughtAt;
+    private String BoughtAt;
 
     private Integer quantity;
     private Long sumTotalInCartHistory(){

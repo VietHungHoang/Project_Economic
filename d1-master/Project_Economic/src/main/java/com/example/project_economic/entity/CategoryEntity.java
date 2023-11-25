@@ -28,11 +28,11 @@ public class CategoryEntity {
         this.name=name;
         this.is_actived=true;
         this.is_deleted=false;
-        DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("ss:mm:HH,dd/MM/YYYY");
+        DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("HH:mm:ss,dd/MM/yyyy");
         this.createdDate=dateTimeFormatter.format(LocalDateTime.now());
     }
     public void updateTime(){
-        DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("ss:mm:HH,dd/MM/YYYY");
+        DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("HH:mm:ss,dd/MM/yyyy");
         this.createdDate=dateTimeFormatter.format(LocalDateTime.now());
     }
 }

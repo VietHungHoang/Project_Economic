@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -34,30 +35,32 @@ public class EmailSenderImpl implements EmailSenderService {
 
         UserEntity user=this.userRepository.findById(userId).get();
         message.setTo(user.getEmail());
-
+        DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("HH:mm:ss,dd/MM/yyyy");
         String subject = "";
         String body = "";
-        Long totalMany = 0l;
+        Long totalMoney = 0l;
         List<CartItemEntity> cartItemEntities=this.cartItemRepository.findByUser(user);
         for (CartItemEntity cartItem:cartItemEntities) {
             HistoryCard historyCard=HistoryCard.builder()
                     .quantity(cartItem.getQuantity())
                     .product(cartItem.getProduct())
                     .Received(false)
-                    .BoughtAt(LocalDateTime.now())
+                    .BoughtAt(dateTimeFormatter.format(LocalDateTime.now()))
                     .user(user)
                     .build();
             subject = "Đơn hàng mới của " + user.getUsername() + " " + "vào ngày " + historyCard.getBoughtAt();
             body += "Tên sản phẩm: " + historyCard.getProduct().getName() + "\n";
             body += "Ngày đặt: " + historyCard.getBoughtAt() + "\n";
             body += "Số lượng: " + historyCard.getQuantity() + "\n";
-            body += "Số tiền: " + historyCard.getProduct().getSalePrice() + "\n\n";
-            totalMany += cartItem.totalInCartItem();
+            body += "Số tiền: " + historyCard.getProduct().getSalePrice() + "₫\n\n";
+            totalMoney += cartItem.totalInCartItem();
         }
-        body += "Tổng số tiền bạn phải thanh toán là: " + totalMany;
+        body += "Địa chỉ nhận hàng: " + user.getAddress() + "\n";
+        body += "Tổng số tiền bạn phải thanh toán là: " + totalMoney + '₫';
                 message.setText(body);
                 message.setSubject(subject);
 
                 mailSender.send(message);
                 }
-                }
+    }
+

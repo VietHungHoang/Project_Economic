@@ -5,6 +5,7 @@ import com.example.project_economic.entity.ProductEntity;
 import com.example.project_economic.entity.UserEntity;
 import com.example.project_economic.repository.UserRepository;
 import com.example.project_economic.service.UserService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,5 +33,20 @@ public class UserImpl implements UserService {
     @Override
     public UserEntity findUserById(Long userId) {
         return this.userRepository.findById(userId).get();
+    }
+
+    @Override
+    public UserEntity update(UserEntity userEntity, Long userId){
+        UserEntity userEntityFind = new UserEntity();
+        try{
+            userEntityFind = this.userRepository.findById(userId).get();
+            userEntityFind.setUsername(userEntity.getUsername() != "" ? userEntity.getUsername() : userEntityFind.getUsername());
+            userEntityFind.setEmail(userEntity.getEmail() != "" ? userEntity.getEmail() : userEntityFind.getEmail());
+            userEntityFind.setAddress(userEntity.getAddress() != "" ?  userEntity.getAddress() : userEntityFind.getAddress());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return this.userRepository.save(userEntityFind);
     }
 }
