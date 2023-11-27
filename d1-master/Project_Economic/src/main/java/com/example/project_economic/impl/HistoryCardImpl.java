@@ -49,6 +49,8 @@ public class HistoryCardImpl implements HistoryCardService {
                     .Received(false)
                     .BoughtAt(dateTimeFormatter.format(LocalDateTime.now()))
                     .user(user)
+                    .size(cartItem.getSize())
+                    .color(cartItem.getColor())
                     .build();
             this.historyCardRepository.save(historyCard);
         }
@@ -64,6 +66,8 @@ public class HistoryCardImpl implements HistoryCardService {
                     .Received(cart.getReceived())
                     .BoughtAt(cart.getBoughtAt())
                     .quantity(cart.getQuantity())
+                    .size(cart.getSize())
+                    .color(cart.getColor())
                     .productResponse(this.productUtils.enity_to_response(cart.getProduct()))
                     .build();
         }).collect(Collectors.toList());

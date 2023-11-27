@@ -2,11 +2,13 @@ package com.example.project_economic.impl;
 
 import com.example.project_economic.dto.ProductDto;
 import com.example.project_economic.entity.ProductEntity;
+import com.example.project_economic.entity.UserEntity;
 import com.example.project_economic.repository.ProductRepository;
 import com.example.project_economic.response.PageProductResponse;
 import com.example.project_economic.response.ProductResponse;
 import com.example.project_economic.service.CategoryService;
 import com.example.project_economic.service.ProductService;
+import com.example.project_economic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +26,8 @@ public class ProductImpl implements ProductService {
     private ProductRepository productRepository;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private UserService userService;
 //    @Autowired
 //    private ImageUpload imageUpload;
     @Override
@@ -57,7 +61,9 @@ public class ProductImpl implements ProductService {
             productEntity.setLikes(0);
             productEntity.setIs_actived(true);
             productEntity.setIs_deteted(false);
+            productEntity.setSellerId(productDto.getSellerId());
             ProductEntity productSaved=this.productRepository.save(productEntity);
+
             return enity_to_response(productSaved);
         }catch (Exception exception){
             exception.printStackTrace();
@@ -143,6 +149,15 @@ public class ProductImpl implements ProductService {
 
         this.productRepository.save(product);
     }
+
+//    @Override
+//    public void likeById(Long productId) {
+//        ProductEntity product=this.productRepository.findById(productId).get();
+//        product.setIs_deteted(false);
+//        product.setIs_actived(true);
+//
+//        this.productRepository.save(product);
+//    }
 
     @Override
     public List<Object[]> countProductByCategoryId() {

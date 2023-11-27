@@ -26,6 +26,8 @@
                                 <th>Sản phẩm</th>
                                 <th>Giá</th>
                                 <th>Số lượng</th>
+                                <th>Màu sắc</th>
+                                <th>Kích thước</th>
                                 <th>Thành tiền</th>
                                 <th>Xoá</th>
                             </tr>
@@ -49,6 +51,8 @@
                                         <input type="hidden" th:value="${cartITem.id}" class="cartIdInCard"/>
                                     </div>
                                 </td>
+                                <td th:text="${cartITem.getColor()}"></td>
+                                <td th:text="${cartITem.getSize()}"></td>
                                 <td th:id="totalmaney+${cartITem.getId()}" th:class="totalmaney" th:text="${cartITem.totalInCartItem()} + '₫'" >
 <!--                                    [[${cartITem.totalInCartItem()}]]-->
                                 </td>
@@ -109,18 +113,11 @@
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(document).ready(function (){
-        $(".cart-btn").click(function (){
-            alert("Đã mua");
-        });
-    });
-</script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="/lib/easing/easing.min.js"></script>
 <script src="/lib/slick/slick.min.js"></script>
 
-<!-- Template Javascript -->
+<!-- Javascript -->
 <script src="/images/main.js"></script>
 </body>
 <script th:inline="javascript">
@@ -198,6 +195,11 @@
         })
     })
     function buy_product(){
+        var cartItems = document.querySelectorAll(".list_cartItem");
+
+        if (cartItems.length > 0) {
+            alert("Đơn hàng đã đặt thành công, vui lòng kiểm tra tin nhắn trong hòm thư");
+        }
         var userId = ''
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {

@@ -43,7 +43,7 @@
                     <div class="col-md-3">
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                             <a class="nav-link active" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Đơn hàng</a>
-<!--                            <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Phương thức thanh toán</a>-->
+                            <a class="nav-link " id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-heart"></i>Sản phẩm yêu thích</a>
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Thông tin tài khoản</a>
                         </div>
                     </div>
@@ -60,7 +60,9 @@
                                                 <th>Hình ảnh</th>
                                                 <th>Ngày đặt</th>
                                                 <th>Số lượng</th>
-                                                <th>Số tiền</th>
+                                                <th>Kích thước</th>
+                                                <th>Màu sắc</th>
+                                                <th>Thành tiền</th>
                                                 <th>Chi tiết</th>
                                             </tr>
                                         </thead>
@@ -71,11 +73,47 @@
                                                 <td>
                                                     <img th:src="${cart.getProductResponse().getImage_url()}" style="width: 25px;height: 25px">
                                                 </td>
-                                                <td th:text="${cart.boughtAt}">$99</td>
-                                                <td th:text="${cart.quantity}">Approved</td>
-                                                <td th:text="${cart.getProductResponse().getCostPrice()*cart.quantity}">Approved</td>
-                                                <td><button class="btn">View</button></td>
+                                                <td th:text="${cart.boughtAt}"></td>
+                                                <td th:text="${cart.quantity}"></td>
+                                                <td th:text="${cart.size}"></td>
+                                                <td th:text="${cart.color}"></td>
+                                                <td th:text="${cart.sumTotalInCartHistoryFormat()}"></td>
+                                                <td><button class="btn" th:onclick="searchProductById([[${cart.getProductResponse().getId()}]])">Xem</button></td>
                                             </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Ngày đặt</th>
+                                            <th>Số lượng</th>
+                                            <th>Kích thước</th>
+                                            <th>Màu sắc</th>
+                                            <th>Thành tiền</th>
+                                            <th>Chi tiết</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="cart,index:${history_card}">
+                                            <td th:text="${index.count}"></td>
+                                            <td th:text="${cart.getProductResponse().getName()}">Product Name</td>
+                                            <td>
+                                                <img th:src="${cart.getProductResponse().getImage_url()}" style="width: 25px;height: 25px">
+                                            </td>
+                                            <td th:text="${cart.boughtAt}"></td>
+                                            <td th:text="${cart.quantity}"></td>
+                                            <td th:text="${cart.size}"></td>
+                                            <td th:text="${cart.color}"></td>
+                                            <td th:text="${cart.sumTotalInCartHistoryFormat()}"></td>
+                                            <td><button class="btn" th:onclick="searchProductById([[${cart.getProductResponse().getId()}]])">Xem</button></td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>

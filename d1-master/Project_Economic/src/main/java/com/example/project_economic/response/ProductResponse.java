@@ -24,6 +24,7 @@ public class ProductResponse {
     private CategoryEntity categoryEntity;
     private Boolean is_deleted;
     private Boolean is_actived;
+    private Integer sellId;
 
     public String getSalePriceFormat(){
         String formattedNumber = this.salePrice.toString();

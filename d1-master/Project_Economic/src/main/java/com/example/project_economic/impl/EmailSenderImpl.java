@@ -29,7 +29,7 @@ public class EmailSenderImpl implements EmailSenderService {
         this.userRepository = userRepository;
     }
     @Override
-    public void sendEmail(Long userId){
+    public String sendEmail(Long userId){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("viethunghoang1508@gmail.com");
 
@@ -46,21 +46,28 @@ public class EmailSenderImpl implements EmailSenderService {
                     .product(cartItem.getProduct())
                     .Received(false)
                     .BoughtAt(dateTimeFormatter.format(LocalDateTime.now()))
+                    .color(cartItem.getColor())
+                    .size(cartItem.getSize())
                     .user(user)
                     .build();
             subject = "Đơn hàng mới của " + user.getUsername() + " " + "vào ngày " + historyCard.getBoughtAt();
             body += "Tên sản phẩm: " + historyCard.getProduct().getName() + "\n";
             body += "Ngày đặt: " + historyCard.getBoughtAt() + "\n";
             body += "Số lượng: " + historyCard.getQuantity() + "\n";
+            body += "Kích thước: " + historyCard.getSize() + "\n";
+            body += "Màu sắc: " + historyCard.getColor() + "\n";
             body += "Số tiền: " + historyCard.getProduct().getSalePrice() + "₫\n\n";
             totalMoney += cartItem.totalInCartItem();
         }
+        if(totalMoney == 0) return "Không có sản phẩm trong giỏ hàng";
         body += "Địa chỉ nhận hàng: " + user.getAddress() + "\n";
         body += "Tổng số tiền bạn phải thanh toán là: " + totalMoney + '₫';
                 message.setText(body);
                 message.setSubject(subject);
 
                 mailSender.send(message);
+                return "Gửi mail thành công";
                 }
+
     }
 

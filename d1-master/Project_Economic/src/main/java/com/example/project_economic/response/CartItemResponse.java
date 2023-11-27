@@ -13,6 +13,8 @@ public class CartItemResponse {
     private ProductResponse productResponse;
     private UserEntity user;
     private int quantity;
+    private String size;
+    private String color;
 //    public String totalInCartItem(){
 //        String formattedNumber = String.valueOf((this.quantity*this.productResponse.getSalePrice()));
 //        StringBuilder result = new StringBuilder();

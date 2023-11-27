@@ -17,6 +17,7 @@ public interface ProductService {
     ProductResponse findById(Long productId);
     void deleteById(Long productId);
     void activeById(Long productId);
+//    void likeById(long productId);
     List<Object[]> countProductByCategoryId();
     ProductEntity findByIdInRescontroller(Long id);
 

@@ -31,10 +31,13 @@ public class HistoryCard {
     private String BoughtAt;
 
     private Integer quantity;
+    private String size;
+    private String color;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;
+
 
 
 }

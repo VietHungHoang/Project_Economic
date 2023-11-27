@@ -18,10 +18,22 @@ public class HistoryCartDto {
     private Boolean Received=false;
 
     private String BoughtAt;
-
+    private String size;
+    private String color;
     private Integer quantity;
-    private Long sumTotalInCartHistory(){
-        return this.quantity*this.productResponse.getCostPrice();
+    public Long sumTotalInCartHistory(){
+        return this.quantity*this.productResponse.getSalePrice();
+    }
+
+    public String sumTotalInCartHistoryFormat(){
+        String formattedNumber = (this.quantity*this.productResponse.getSalePrice()) + "";
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < formattedNumber.length(); i++) {
+            char currentChar = formattedNumber.charAt(i);
+            if (Character.isDigit(currentChar) && i > 0 && (formattedNumber.length() - i) % 3 == 0) result.append('.');
+            result.append(currentChar);
+        }
+        return result.toString() + '₫';
     }
 
 }

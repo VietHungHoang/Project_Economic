@@ -37,5 +37,6 @@ public class ProductEntity {
     private CategoryEntity categoryEntity;
     private Boolean is_deteted;
     private Boolean is_actived;
+    private Integer sellerId;
 
     }

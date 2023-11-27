@@ -16,9 +16,10 @@ public class ProductDto {
     private Long costPrice;
     private Long salePrice;
     private Integer currentQuantity;
-    private Integer Likes;
+    private Integer likes;
     private String image;
     private Long  categoryId;
     private Boolean is_deteted;
     private Boolean is_actived;
+    private Integer sellerId;
 }

@@ -40,7 +40,7 @@ public class CartController {
             @PathVariable Integer quantity,
             @PathVariable Long userId
     ){
-        CartItemEntity cartItemEntity=this.cartItemService.addProduct(productId,quantity,userId);
+        CartItemEntity cartItemEntity=this.cartItemService.addProduct(productId,quantity,userId, "", "");
         List<CartItemResponse>cartItemEntities=this.cartItemService.listCartItem(userId);
 
         return this.cartItemService.countCart(userId);
@@ -50,9 +50,12 @@ public class CartController {
             @PathVariable Long productId,
             @PathVariable Integer quantity,
             @PathVariable Long userId,
+            @RequestParam String size,
+            @RequestParam String color,
             Model model
     ){
-        CartItemEntity cartItemEntity=this.cartItemService.addProduct(productId,quantity,userId);
+        System.out.println(size);
+        CartItemEntity cartItemEntity=this.cartItemService.addProduct(productId,quantity,userId, size, color);
         List<CartItemResponse>cartItemEntities=this.cartItemService.listCartItem(userId);
         model.addAttribute("cartItems",cartItemEntities);
 

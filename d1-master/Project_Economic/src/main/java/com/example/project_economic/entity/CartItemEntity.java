@@ -24,7 +24,8 @@ public class CartItemEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-
+    private String size;
+    private String color;
     private int quantity;
     public Long totalInCartItem(){
         return this.quantity*this.getProduct().getSalePrice();

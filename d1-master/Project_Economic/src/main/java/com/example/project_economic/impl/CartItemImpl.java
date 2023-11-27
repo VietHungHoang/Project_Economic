@@ -40,6 +40,8 @@ public class CartItemImpl implements CartItemService {
                     cartItemResponse.setProductResponse(productUtils.enity_to_response(cartITemEntity.getProduct()));
                     cartItemResponse.setQuantity(cartITemEntity.getQuantity());
                     cartItemResponse.setUser(cartITemEntity.getUser());
+                    cartItemResponse.setSize(cartITemEntity.getSize());
+                    cartItemResponse.setColor(cartITemEntity.getColor());
                     return cartItemResponse;
                 }).collect(Collectors.toList());
 
@@ -58,16 +60,19 @@ public class CartItemImpl implements CartItemService {
     }
 
     @Override
-    public CartItemEntity addProduct(Long productId, Integer quantity, Long userId) {
+    public CartItemEntity addProduct(Long productId, Integer quantity, Long userId, String size, String color) {
         UserEntity user=this.userRepository.findById(userId).get();
         ProductEntity product=this.productRepository.findById(productId).get();
-        CartItemEntity cartItemEntity=this.cartItemRepository.findByUserAndProduct(user,product);
+        CartItemEntity cartItemEntity=this.cartItemRepository.findByUserAndProductAttribute(user.getId(),product.getId(), size, color);
         if(cartItemEntity==null){
             CartItemEntity cartItemEntity1=new CartItemEntity();
             cartItemEntity1.setQuantity(quantity);
             cartItemEntity1.setProduct(product);
             cartItemEntity1.setUser(user);
+            cartItemEntity1.setSize(size);
+            cartItemEntity1.setColor(color);
             return this.cartItemRepository.save(cartItemEntity1);
+
         }
         else{
             int quantityNew=cartItemEntity.getQuantity()+quantity;
