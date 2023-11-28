@@ -50,7 +50,7 @@ public class ProductController {
         }
         return countProuductDtos;
     }
-    @GetMapping("/create/")
+    @GetMapping("/create")
     public String showFormCreate( Model model) {
         model.addAttribute("countProductByCategory",this.countProuductDtos());
         model.addAttribute("categories", this.categoryService.findAll());
@@ -71,7 +71,7 @@ public class ProductController {
         model.addAttribute("product", new ProductDto());
 //        model.addAttribute("countProductByCategory",this.productService.countProductByCategoryId());
         model.addAttribute("categories", this.categoryService.findAll());
-        model.addAttribute("allproducts", this.productService.findAllProductByUserId(productDto.getSellerId()));
+        model.addAttribute("allproducts", this.productService.findAll());
 //        getCategoryId()
         return "home/createproduct";
     }
