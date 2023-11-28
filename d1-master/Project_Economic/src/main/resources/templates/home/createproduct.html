@@ -85,6 +85,7 @@
                                 <label>Chọn ảnh</label>
                                 <input type="file" name="imageProduct" id="imageProduct">
                             </div>
+                            <input type="hidden" th:field="*{sellerId}" th:id="sellerIdInput" />
                             <button type="submit" class="btn btn-success mt-4">Tạo</button>
                         </form>
 
@@ -258,6 +259,60 @@
 <script src="/images/main.js"></script>
 <script>
     getUserNameFromCookie()
+    function getUserId() {
+        var cookies = document.cookie.split(';');
+        var userId = '';
+
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.startsWith('userId=')) {
+                userId = cookie.substring('userId='.length, cookie.length);
+                break;
+            }
+        }
+        return userId;
+    }
+
+    // function sendUserIdToBackend() {
+    //     var userId = getUserId();
+    //
+    //     if (userId !== '') {
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "/api/sendUserId",
+    //             contentType: "application/json",
+    //             data: JSON.stringify({ userId: userId }),
+    //             success: function(data) {
+    //                 console.log('Phản hồi thành công:', data);
+    //             },
+    //             error: function(error) {
+    //                 console.error('Lỗi gửi dữ liệu:', error);
+    //             }
+    //         });
+    //     } else {
+    //         console.error('Không tìm thấy ID');
+    //     }
+    // }
+    // var userId = getUserId();
+    // $.ajax({
+    //     type: "POST",
+    //     url: "/api/products/create",
+    //     data: { userId: userId },
+    // }).done(function (res) {
+    //     console.log('Phản hồi về backend:', res);
+    // }).fail(function (error) {
+    //     console.error('Lỗi khi gửi dữ liệu đến backend:', error);
+    // });
+    var userId = getUserId();
+    document.getElementById("sellerIdInput").value = userId;
+    document.querySelector("form").addEventListener("submit", function (event) {
+        if (!document.getElementById("sellerIdInput").value) {
+            event.preventDefault();
+            console.error("Lỗi");
+        }
+    });
+
+
 </script>
 </body>
 </html>

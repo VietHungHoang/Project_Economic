@@ -64,6 +64,7 @@ public class ProductController {
         try {
             this.productService.save(productDto, imageProduct);
         } catch (Exception exception) {
+            System.out.println("---------------------------------------------");
             model.addAttribute("error", "error");
         }
         model.addAttribute("countProductByCategory",this.countProuductDtos());
