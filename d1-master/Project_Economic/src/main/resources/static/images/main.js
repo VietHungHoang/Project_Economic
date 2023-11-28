@@ -383,6 +383,21 @@ function changeNumberCart(number) {
     $('.numbercart').text(number)
 }
 
+function getCreateProduct(){
+    var userId = ''
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.startsWith('userId=')) {
+            userId = cookie.substring('userId='.length, cookie.length);
+            break;
+        }
+    }
+        window.location.href = 'http://localhost:3000/api/products/create/' + userId;
+    return false;
+}
+
+
 function redirectToProductPage() {
     getNumberCartInEveryPage()
     window.location.href = 'http://localhost:3000/api/carts/all/1';

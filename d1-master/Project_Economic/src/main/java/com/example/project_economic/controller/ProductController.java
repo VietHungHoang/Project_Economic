@@ -6,6 +6,7 @@ import com.example.project_economic.dto.Price;
 import com.example.project_economic.dto.ProductDto;
 import com.example.project_economic.entity.ProductEntity;
 import com.example.project_economic.response.PageProductResponse;
+import com.example.project_economic.response.ProductResponse;
 import com.example.project_economic.service.CartItemService;
 import com.example.project_economic.service.CategoryService;
 import com.example.project_economic.service.CommentService;
@@ -50,12 +51,12 @@ public class ProductController {
         }
         return countProuductDtos;
     }
-    @GetMapping("/create")
-    public String showFormCreate( Model model) {
+    @GetMapping("/create/{userId}")
+    public String showFormCreate(@PathVariable Long userId, Model model) {
         model.addAttribute("countProductByCategory",this.countProuductDtos());
         model.addAttribute("categories", this.categoryService.findAll());
         model.addAttribute("product", new ProductDto());
-        model.addAttribute("allproducts", this.productService.findAllProductByUserId(1l));
+        model.addAttribute("allproducts", this.productService.findAllProductByUserId(userId));
         return "home/createproduct";
     }
 
@@ -71,7 +72,7 @@ public class ProductController {
         model.addAttribute("product", new ProductDto());
 //        model.addAttribute("countProductByCategory",this.productService.countProductByCategoryId());
         model.addAttribute("categories", this.categoryService.findAll());
-        model.addAttribute("allproducts", this.productService.findAll());
+        model.addAttribute("allproducts", this.productService.findAllProductByUserId(productDto.getSellerId()));
 //        getCategoryId()
         return "home/createproduct";
     }
@@ -83,7 +84,8 @@ public class ProductController {
         model.addAttribute("productEdit", this.productService.findById(productId));
         model.addAttribute("categories", this.categoryService.findAll());
         model.addAttribute("product", new ProductDto());
-        model.addAttribute("allproducts", this.productService.findAll());
+        ProductResponse product = this.productService.findById(productId);
+        model.addAttribute("allproducts", this.productService.findAllProductByUserId(product.getUserEntity().getId()));
         return "/home/createproduct";
     }
 
@@ -93,7 +95,7 @@ public class ProductController {
         model.addAttribute("countProductByCategory",this.countProuductDtos());
         model.addAttribute("categories", this.categoryService.findAll());
         model.addAttribute("product", new ProductDto());
-        model.addAttribute("allproducts", this.productService.findAll());
+        model.addAttribute("allproducts", this.productService.findAllProductByUserId(productDto.getSellerId()));
         return "/home/createproduct";
     }
 
@@ -103,7 +105,8 @@ public class ProductController {
         model.addAttribute("countProductByCategory",this.countProuductDtos());
         model.addAttribute("categories", this.categoryService.findAll());
         model.addAttribute("product", new ProductDto());
-        model.addAttribute("allproducts", this.productService.findAll());
+        ProductResponse product = this.productService.findById(id);
+        model.addAttribute("allproducts", this.productService.findAllProductByUserId(product.getUserEntity().getId()));
         return "/home/createproduct";
     }
     @GetMapping("/active/")
@@ -112,8 +115,18 @@ public class ProductController {
         model.addAttribute("countProductByCategory",this.countProuductDtos());
         model.addAttribute("categories", this.categoryService.findAll());
         model.addAttribute("product", new ProductDto());
-        model.addAttribute("allproducts", this.productService.findAll());
+        ProductResponse product = this.productService.findById(id);
+        model.addAttribute("allproducts", this.productService.findAllProductByUserId(product.getUserEntity().getId()));
         return "/home/createproduct";
+    }
+
+    @GetMapping("/like/")
+    public String likeProduct(@RequestParam("id") Long id,Model model){
+        this.productService.likeById(id);
+        model.addAttribute("categories",this.categoryService.findAllByActived());
+        model.addAttribute("products",this.productService.findAllIsActived());
+        model.addAttribute("prices",prices);
+        return "/home/product-list";
     }
 
     @GetMapping("/productdetail/{userId}/{productId}")

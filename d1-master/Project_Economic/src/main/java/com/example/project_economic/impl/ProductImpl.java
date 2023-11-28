@@ -2,7 +2,6 @@ package com.example.project_economic.impl;
 
 import com.example.project_economic.dto.ProductDto;
 import com.example.project_economic.entity.ProductEntity;
-import com.example.project_economic.entity.UserEntity;
 import com.example.project_economic.repository.ProductRepository;
 import com.example.project_economic.response.PageProductResponse;
 import com.example.project_economic.response.ProductResponse;
@@ -94,6 +93,7 @@ public class ProductImpl implements ProductService {
         productResponse.setCategoryEntity(productSaved.getCategoryEntity());
         productResponse.setIs_deleted(productSaved.getIs_deteted());
         productResponse.setIs_actived(productSaved.getIs_actived());
+        productResponse.setUserEntity(productSaved.getUserEntity());
         return productResponse;
     }
 
@@ -151,14 +151,17 @@ public class ProductImpl implements ProductService {
         this.productRepository.save(product);
     }
 
-//    @Override
-//    public void likeById(Long productId) {
-//        ProductEntity product=this.productRepository.findById(productId).get();
-//        product.setIs_deteted(false);
-//        product.setIs_actived(true);
-//
-//        this.productRepository.save(product);
-//    }
+    @Override
+    public void likeById(Long productId) {
+        ProductEntity product=this.productRepository.findById(productId).get();
+        try{
+            product.setLikes(product.getLikes() + 1);
+        }
+        catch (Exception e){
+            product.setLikes(1);
+        }
+        this.productRepository.save(product);
+    }
 
     @Override
     public List<Object[]> countProductByCategoryId() {

@@ -95,13 +95,17 @@
                                 <div class="product-action">
                                     <input type="hidden" th:value="${product.id}"/>
                                     <a class="addproducttocard"><i class="fa fa-cart-plus"></i></a>
-                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a th:href="@{/api/products/like/(id=${product.getId()})}">
+                                        <div type="button"></div>
+                                        <i class="fa fa-heart"></i>
+                                    </a>
                                     <a th:onclick="searchProductById([[${product.id}]])"><i class="fa fa-search"></i></a>
                                 </div>
                             </div>
                             <div class="product-price">
                                 <h3 th:text="${product.getSalePriceFormat()}"></h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart" onclick="buy_product()"></i>Mua ngay</a>
+<!--                                <span style="color: gray; text-decoration: line-through;"  th:text="${product.getCostPriceFormat()}"></span>-->
+                                <a class="btn" th:onclick="searchProductById([[${product.id}]])"><i class="fa fa-shopping-cart" ></i>Chi tiết</a>
                             </div>
                         </div>
                     </div>
