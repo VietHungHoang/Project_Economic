@@ -1,6 +1,7 @@
 package com.example.project_economic.response;
 
 import com.example.project_economic.entity.CategoryEntity;
+import com.example.project_economic.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,27 +25,39 @@ public class ProductResponse {
     private CategoryEntity categoryEntity;
     private Boolean is_deleted;
     private Boolean is_actived;
-    private Integer sellerId;
+    private UserEntity userEntity;
 
     public String getSalePriceFormat(){
-        String formattedNumber = this.salePrice.toString();
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < formattedNumber.length(); i++) {
-            char currentChar = formattedNumber.charAt(i);
-            if (Character.isDigit(currentChar) && i > 0 && (formattedNumber.length() - i) % 3 == 0) result.append('.');
-            result.append(currentChar);
+        try{
+            String formattedNumber = this.salePrice.toString();
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < formattedNumber.length(); i++) {
+                char currentChar = formattedNumber.charAt(i);
+                if (Character.isDigit(currentChar) && i > 0 && (formattedNumber.length() - i) % 3 == 0) result.append('.');
+                result.append(currentChar);
+            }
+            return result.toString() + '₫';
         }
-        return result.toString() + '₫';
+        catch(Exception e){
+            return "123";
+        }
     }
 
     public String getCostPriceFormat(){
-        String formattedNumber = this.costPrice.toString();
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < formattedNumber.length(); i++) {
-            char currentChar = formattedNumber.charAt(i);
-            if (Character.isDigit(currentChar) && i > 0 && (formattedNumber.length() - i) % 3 == 0) result.append('.');
-            result.append(currentChar);
+        try{
+            String formattedNumber = this.costPrice.toString();
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < formattedNumber.length(); i++) {
+                char currentChar = formattedNumber.charAt(i);
+                if (Character.isDigit(currentChar) && i > 0 && (formattedNumber.length() - i) % 3 == 0) result.append('.');
+                result.append(currentChar);
+            }
+            return result.toString() + '₫';
         }
-        return result.toString() + '₫';
+        catch (Exception e){
+            return "1234";
+        }
+
+
     }
 }

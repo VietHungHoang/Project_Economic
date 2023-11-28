@@ -50,12 +50,12 @@ public class ProductController {
         }
         return countProuductDtos;
     }
-    @GetMapping("/create")
-    public String showFormCreate(Model model) {
+    @GetMapping("/create/")
+    public String showFormCreate( Model model) {
         model.addAttribute("countProductByCategory",this.countProuductDtos());
         model.addAttribute("categories", this.categoryService.findAll());
         model.addAttribute("product", new ProductDto());
-        model.addAttribute("allproducts", this.productService.findAll());
+        model.addAttribute("allproducts", this.productService.findAllProductByUserId(1l));
         return "home/createproduct";
     }
 
@@ -63,15 +63,16 @@ public class ProductController {
     public String saveProduct(@ModelAttribute("product") ProductDto productDto, @RequestParam("imageProduct") MultipartFile imageProduct, Model model) {
         try {
             this.productService.save(productDto, imageProduct);
+            System.out.println("Debug: Your message here");
         } catch (Exception exception) {
-            System.out.println("---------------------------------------------");
             model.addAttribute("error", "error");
         }
         model.addAttribute("countProductByCategory",this.countProuductDtos());
-        model.addAttribute("countProductByCategory",this.productService.countProductByCategoryId());
-        model.addAttribute("categories", this.categoryService.findAll());
         model.addAttribute("product", new ProductDto());
-        model.addAttribute("allproducts", this.productService.findAll());
+//        model.addAttribute("countProductByCategory",this.productService.countProductByCategoryId());
+        model.addAttribute("categories", this.categoryService.findAll());
+        model.addAttribute("allproducts", this.productService.findAllProductByUserId(productDto.getSellerId()));
+//        getCategoryId()
         return "home/createproduct";
     }
 

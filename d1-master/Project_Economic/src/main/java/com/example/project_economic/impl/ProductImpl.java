@@ -61,7 +61,8 @@ public class ProductImpl implements ProductService {
             productEntity.setLikes(0);
             productEntity.setIs_actived(true);
             productEntity.setIs_deteted(false);
-            productEntity.setSellerId(productDto.getSellerId());
+            productEntity.setUserEntity(this.userService.findUserById(productDto.getSellerId()));
+//            productEntity.setSellerId();
             ProductEntity productSaved=this.productRepository.save(productEntity);
 
             return enity_to_response(productSaved);
@@ -251,5 +252,22 @@ public class ProductImpl implements ProductService {
         pageProductResponse.setPageSize(pageSize);
         return pageProductResponse;
     }
+
+    @Override
+    public List<ProductResponse> findAllProductByUserId(Long userId) {
+        List<ProductEntity>productEntities=this.productRepository.findAllProductByUserId(userId);
+        List<ProductResponse>productDtos=productEntities.stream().map((product)->{
+            return this.enity_to_response(product);
+        }).collect(Collectors.toList());
+        return productDtos;
+    }
+//    @Override
+//    public List<ProductResponse> findAllIsActived() {
+//        List<ProductEntity>productEntities=this.productRepository.findAllProductIsAvtived();
+//        List<ProductResponse>productDtos=productEntities.stream().map((product)->{
+//            return this.enity_to_response(product);
+//        }).collect(Collectors.toList());
+//        return productDtos;
+//    }
 
 }

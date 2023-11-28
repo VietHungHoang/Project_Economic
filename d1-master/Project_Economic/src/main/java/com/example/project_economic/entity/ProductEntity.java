@@ -35,8 +35,11 @@ public class ProductEntity {
     @ManyToOne(fetch =FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id",referencedColumnName = "category_id")
     private CategoryEntity categoryEntity;
+
+    @ManyToOne(fetch =FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "seller_id",referencedColumnName = "id")
+    private UserEntity userEntity;
+
     private Boolean is_deteted;
     private Boolean is_actived;
-    private Integer sellerId;
-
     }

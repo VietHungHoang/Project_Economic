@@ -1,6 +1,7 @@
 package com.example.project_economic.repository;
 
 import com.example.project_economic.entity.ProductEntity;
+import com.example.project_economic.response.ProductResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -36,4 +37,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
 
     @Query(value = "select * from products where product_id in ?1",nativeQuery = true)
     List<ProductEntity> findByIds(List<Long> ids);
+
+    @Query(value = "select * from products as p where p.seller_id = ?1",nativeQuery = true)
+    List<ProductEntity>findAllProductByUserId(Long userId);
 }

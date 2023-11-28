@@ -21,5 +21,5 @@ public class ProductDto {
     private Long  categoryId;
     private Boolean is_deteted;
     private Boolean is_actived;
-    private Integer sellerId;
+    private Long sellerId;
 }
