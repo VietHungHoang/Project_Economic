@@ -30,10 +30,9 @@
             <div class="col-md-8">
               <div class="mb-4">
               <h3>Đăng nhập</h3>
-<!--              <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>-->
             </div>
               <div th:if="${error}" th:class="align-items-center">
-                <h6 th:text="${error}" th:class="text-danger">{{error}}</h6>
+                <h6 th:text="${error}" th:class="text-danger"></h6>
               </div>
             <form method="post" th:action="@{/api/users/home}" th:object="${userEntity}">
               <div class="form-group first mb-4">
@@ -49,7 +48,7 @@
                   <input type="checkbox" checked="checked"/>
                   <div class="control__indicator"></div>
                 </label>
-                <span class="ml-auto"><a href="#" class="forgot-pass">Quên mật khẩu</a></span>
+<!--                <span class="ml-auto"><a href="#" class="forgot-pass">Quên mật khẩu</a></span>-->
               </div>
 
               <input type="submit" value="Đăng nhập" class="btn btn-block btn-primary mb-2" >

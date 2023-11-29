@@ -54,7 +54,7 @@
                                 <td th:text="${cartITem.getColor()}"></td>
                                 <td th:text="${cartITem.getSize()}"></td>
                                 <td th:id="totalmaney+${cartITem.getId()}" th:class="totalmaney" th:text="${cartITem.totalInCartItem()} + '₫'" >
-<!--                                    [[${cartITem.totalInCartItem()}]]-->
+                                    <!--                                    [[${cartITem.totalInCartItem()}]]-->
                                 </td>
                                 <td class="td_removecard">
                                     <button class="btn_removecart"><i class="fa fa-trash"></i>
@@ -71,8 +71,14 @@
             <div class="col-lg-4">
                 <div class="cart-page-inner">
                     <div class="row">
-                        <div class="col-md-12" id="valid-show-notice" style="display: none; margin-bottom: 10px">
-                            <p3>Vui lòng nhập đầy đủ thông tin về số điện thoại và địa chỉ nhận hàng</p3>
+                        <div class="col-md-12 align-items-center" id="valid-show-notice" style="display: none; margin-bottom: 10px">
+                            <h6 class="text-danger">Vui lòng nhập đầy đủ thông tin về số điện thoại và địa chỉ nhận hàng</h6>
+                        </div>
+                        <div class="col-md-12 align-items-center" id="wrong-show-notice" style="display: none; margin-bottom: 10px">
+                            <h6 class="text-danger">Mã giảm giá không hợp lệ hoặc đã hết hạn sử dụng.</h6>
+                        </div>
+                        <div class="col-md-12 align-items-center" id="accept-show-notice" style="display: none; margin-bottom: 10px">
+                            <h6 class="text-danger">Áp dụng mã giảm giá thành công!</h6>
                         </div>
                         <div class="col-md-12">
                             <div class="coupon">
@@ -89,6 +95,9 @@
                                     <button th:if="${user.getPhoneNumber() != null && user.getAddress() != null}" onclick="buy_product()">Mua ngay</button>
 
                                     <button th:if="${user.getPhoneNumber() == null || user.getAddress() == null}" onclick="check_account()">Mua ngay</button>
+                                </div>
+                                <div style="margin-bottom:150px">
+
                                 </div>
                             </div>
                         </div>
@@ -133,6 +142,9 @@
     function check_account() {
         if (userAddress == null || userPhoneNumber == null) {
             document.getElementById("valid-show-notice").style.display = "block";
+            document.getElementById("wrong-show-notice").style.display = "none";
+            document.getElementById("accept-show-notice").style.display = "none";
+
         }
     }
 
@@ -143,10 +155,19 @@
             type:"POST",
             url:url,
             success:function (res){
-                console.log(res);
-
-                discountMoney += res;
+                if(discountMoney == 0) discountMoney += res;
+                if (discountName != null && discountMoney == 0) {
+                    document.getElementById("wrong-show-notice").style.display = "block";
+                    document.getElementById("valid-show-notice").style.display = "none";
+                    document.getElementById("accept-show-notice").style.display = "none";
+                } else if(discountMoney > 0) {
+                    document.getElementById("valid-show-notice").style.display = "none";
+                    document.getElementById("wrong-show-notice").style.display = "none";
+                    document.getElementById("accept-show-notice").style.display = "block";
+                }
                 sumTotal();
+                console.log(discountName)
+                console.log([[${wrong}]])
             },
             error:function (xhr,status,error){
                 console.log("nol");
@@ -223,7 +244,7 @@
             },
             error:function (xhr,status,error){
                 console.log("err",cartId)
-        }
+            }
         })
     })
     function buy_product(){

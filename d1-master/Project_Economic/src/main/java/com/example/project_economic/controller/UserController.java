@@ -5,6 +5,7 @@ import com.example.project_economic.dto.ProductDto;
 import com.example.project_economic.entity.CategoryEntity;
 import com.example.project_economic.entity.UserEntity;
 import com.example.project_economic.jwt.JwtService;
+import com.example.project_economic.response.PageProductResponse;
 import com.example.project_economic.response.ProductResponse;
 import com.example.project_economic.service.*;
 import jakarta.servlet.http.HttpSession;
@@ -57,9 +58,15 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("userEntity") UserEntity userEntity,Model model){
+    public String registerUser(@ModelAttribute("userEntity") UserEntity userEntity, @RequestParam("reset-password") String pass, Model model){
         try{
-            this.userService.createUser(userEntity);
+            if(pass.equals(userEntity.getPassword()))
+                this.userService.createUser(userEntity);
+            else{
+                model.addAttribute("wrongpass", "Mật khẩu không khớp!");
+                model.addAttribute("userEntity", userEntity);
+                return "register/index";
+            }
             return "login/index";
         }catch (Exception exception){
 
@@ -97,8 +104,8 @@ public class UserController {
     }
     @GetMapping("/fail")
     public String loginFail(Model model){
-        model.addAttribute("error","Username or password is valid!");
-        model.addAttribute("UserEntity", new UserEntity());
+        model.addAttribute("error","Sai tài khoản hoặc mật khẩu!");
+        model.addAttribute("userEntity", new UserEntity());
         return "login/index";
     }
     @GetMapping("/product-detail")
@@ -124,6 +131,8 @@ public class UserController {
         model.addAttribute("username",principal.getName());
         model.addAttribute("products",this.findByAllProductActive());
         model.addAttribute("numbercart",this.cartItemService.countCart(((UserInfoDetails)(authentication.getPrincipal())).getUserId()));
+        model.addAttribute("categories", this.categoryService.findAllByActived());
+        model.addAttribute("prices",new ProductController().prices);
         return "home/product-list";
     }
     @PostMapping("/update/")

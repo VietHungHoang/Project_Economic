@@ -33,15 +33,22 @@ public class ShoppingCartController {
         UserEntity userEntity = userService.findUserById(userId);
         model.addAttribute("user", userEntity);
         model.addAttribute("cartItems",cartItemEntities);
+        model.addAttribute("wrong", "");
+        model.addAttribute("accept", "");
         return "home/cart";
     }
     @PostMapping("/{discountName}")
     @ResponseBody
-    public Long useDiscount(@PathVariable String discountName){
+    public Long useDiscount(@PathVariable String discountName, Model model){
         try{
             DiscountEntity discountEntity = this.discountService.findByName(discountName);
-            if(discountEntity == null) return 0l;
-            else return discountEntity.getMoney();
+            if(discountEntity == null){
+                return 0l;
+            }
+            else{
+                model.addAttribute("accept", "");
+                return discountEntity.getMoney();
+            }
         }
         catch (Exception e){
             return 0l;

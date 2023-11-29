@@ -54,7 +54,7 @@
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a href="#" class="dropdown-item" th:each="category:${categories}"
                                                    th:text="${category.getName()}"
-                                                   th:onclick="getUrlToCategoryId([[${category.getId()}]])">Newest</a>
+                                                   th:onclick="getUrlToCategoryId([[${category.getId()}]])"></a>
                                             </div>
                                         </div>
                                     </div>
@@ -221,7 +221,7 @@
                     <nav class="navbar bg-light">
                         <ul class="navbar-nav">
                             <li class="nav-item" th:each="category:${categories}">
-                                <a class="nav-link" href="#" th:text="${category.getName()}">Fashion & Beauty 123</a>
+                                <a class="nav-link" href="#" th:text="${category.getName()}"></a>
                             </li>
                         </ul>
                     </nav>
