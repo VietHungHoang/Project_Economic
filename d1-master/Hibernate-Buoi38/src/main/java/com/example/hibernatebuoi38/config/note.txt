@@ -1,0 +1,4 @@
+mô hình mvc
+người dùng tương tác với client => front controller sử dụng dispatcher để tìm ra controller để xử lý request đấy
+resful api :
+trả ra dữ liệu json hoặc xml
