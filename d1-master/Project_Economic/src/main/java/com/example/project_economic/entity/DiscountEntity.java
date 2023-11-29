@@ -6,19 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "discount")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity {
+public class DiscountEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "username",unique = true,nullable = false)
-    private String username;
-    private String email;
-    private String password;
-    private String roles;
-    private String address;
-    private String phoneNumber;
+    @Column(name = "name",unique = true,nullable = false)
+    private String name;
+    private String expiryDate;
 }

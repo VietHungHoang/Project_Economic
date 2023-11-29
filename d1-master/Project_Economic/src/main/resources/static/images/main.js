@@ -472,6 +472,7 @@ function postFirstCommentInPost(productId) {
         console.log(jsonObject)
         stompClient.send("/app/message", {}, JSON.stringify(jsonObject));
     }
+
 }
 
 function connect() {
@@ -484,7 +485,7 @@ function connect() {
             if (comment.step == 1) {
                 addCommentParent(JSON.parse(res.body));
             } else {
-                addCommentRep(JSON.parse(res.body))
+                addCommentRep(JSON.parse(res.body));
             }
         })
 
@@ -496,20 +497,20 @@ function addCommentParent(comment) {
         console.log("appending first-comment");
         console.log(comment)
         let box_comment = `
-             <div id="chatbox" class="commentParent_${comment.id}" style="margin-left: ${comment.step*30}px;">
-			<div class="boxmessage" style="display: flex;flex-direction: column;" id="usersendMessage" >
-                                                    <div class="avatar" id="avatarDiv" >
-                                                        <h4  class="textUserName">${comment.userName}</h4>
+             <div id="chatbox" class="commentParent_${comment.id} product-detail tab-content" style="margin-left: ${comment.step*30}px; padding: 0px">
+			    <div class="boxmessage col-sm-12 row form" style="display: flex;flex-direction: column;" id="usersendMessage" class="container comment-form container tab-pane fade">
+                                                    <div id="avatarDiv" class="boxmessage col-sm-12 row form">
+                                                        <h4  class="textUserName avatar reviewer">${comment.userName}</h4>
                                                     </div>
-                                                    <div id="contentComent" role="alert" style="margin-top: 8px;">
+                                                    <div id="contentComent" role="alert" style="margin-top: 0px">
                                                         ${comment.content}
                                                     </div>
-                                                    <button onclick="showFormRepComment(${comment.id})" style="width: max-content" class="btn1_repcomment">
-                                                        <h5>Rep</h5>
+                                                    <button onclick="showFormRepComment(${comment.id})" style="width: max-content; display: block; margin-top: 15px; font-size: 14px" class="btn1_repcomment col-sm-12 row form">
+                                                        Rep
                                                     </button>
                                                     <div style="width: 100%;display: none" class="form-rep-comment${comment.id}">
                                                         <input name="comment" placeholder="Write a comment" id="textarea-comment-rep${comment.id}"></input>
-                                                        <button type="submit" id="btn-comment-rep" onclick="postRepComment(${comment.id})">Rep Comment</button>
+                                                        <button type="submit" id="btn-comment-rep" onclick="postRepComment(${comment.id})" >Rep Comment</button>
                                                     </div>
                                              </div>
                                             </div>
@@ -571,20 +572,20 @@ function addCommentRep(comment) {
         var commentParent = '.commentParent_' + comment.commentParentId;
         var tagCommentParent = $(commentParent);
         let box_comment=`
-             <div id="chatbox" class="commentParent_${comment.id}" style="margin-left: ${comment.step*30}px;">
-            <div class="boxmessage" style="display: flex;flex-direction: column;" id="usersendMessage" >
-                                                    <div class="avatar" id="avatarDiv" >
-                                                        <h4  class="textUserName">${comment.userName}</h4>
+             <div id="chatbox" class="commentParent_${comment.id} product-detail tab-content" style="margin-left: ${comment.step*30}px; padding: 0px">
+            <div class="boxmessage col-sm-12 row form" style="display: flex;flex-direction: column;" id="usersendMessage" class=" container comment-form container tab-pane fade">
+                                                    <div class="boxmessage col-sm-12 row form" id="avatarDiv" >
+                                                        <h4  class="textUserName avatar reviewer">${comment.userName}</h4>
                                                     </div>
                                                     <div id="contentComent" role="alert" style="margin-top: 8px;">
                                                         ${comment.content}
                                                     </div>
-                                                    <button onclick="showFormRepComment(${comment.id})" style="width: max-content" class="btn1_repcomment">
-                                                        <h5>Rep</h5>
+                                                    <button onclick="showFormRepComment(${comment.id})" style="width: max-content; display: block; margin-top: 15px;" class="btn1_repcomment col-sm-12 row form">
+                                                        Rep
                                                     </button>
                                                     <div style="width: 100%;display: none" class="form-rep-comment${comment.id}">
                                                         <input name="comment" placeholder="Write a comment" id="textarea-comment-rep${comment.id}"></input>
-                                                        <button type="submit" id="btn-comment-rep" onclick="postRepComment(${comment.id})">Rep Comment</button>
+                                                        <button type="submit" id="btn-comment-rep" onclick="postRepComment(${comment.id})" class="btn1_repcomment">Rep Comment</button>
                                                     </div>
                                              </div>
                                              <div>

@@ -60,8 +60,9 @@ public class EmailSenderImpl implements EmailSenderService {
             totalMoney += cartItem.totalInCartItem();
         }
         if(totalMoney == 0) return "Không có sản phẩm trong giỏ hàng";
-        body += "Địa chỉ nhận hàng: " + user.getAddress() + "\n";
         body += "Tổng số tiền bạn phải thanh toán là: " + totalMoney + '₫';
+        body += "Địa chỉ nhận hàng: " + user.getAddress() + "\n";
+        body += "Số điện thoại người nhận: " + user.getPhoneNumber() + "\n";
                 message.setText(body);
                 message.setSubject(subject);
 

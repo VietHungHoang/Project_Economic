@@ -43,6 +43,7 @@ public class UserImpl implements UserService {
             userEntityFind.setUsername(userEntity.getUsername() != "" ? userEntity.getUsername() : userEntityFind.getUsername());
             userEntityFind.setEmail(userEntity.getEmail() != "" ? userEntity.getEmail() : userEntityFind.getEmail());
             userEntityFind.setAddress(userEntity.getAddress() != "" ?  userEntity.getAddress() : userEntityFind.getAddress());
+            userEntityFind.setPhoneNumber(userEntity.getPhoneNumber() != "" ?  userEntity.getPhoneNumber() : userEntityFind.getPhoneNumber());
         }
         catch (Exception e){
             e.printStackTrace();

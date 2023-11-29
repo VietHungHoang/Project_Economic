@@ -33,7 +33,7 @@
 <!--              <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>-->
             </div>
               <div th:if="${error}" th:class="align-items-center">
-                <h6 th:text="${error}" th:class="text-danger"></h6>
+                <h6 th:text="${error}" th:class="text-danger">{{error}}</h6>
               </div>
             <form method="post" th:action="@{/api/users/home}" th:object="${userEntity}">
               <div class="form-group first mb-4">

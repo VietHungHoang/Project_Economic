@@ -98,6 +98,7 @@ public class UserController {
     @GetMapping("/fail")
     public String loginFail(Model model){
         model.addAttribute("error","Username or password is valid!");
+        model.addAttribute("UserEntity", new UserEntity());
         return "login/index";
     }
     @GetMapping("/product-detail")

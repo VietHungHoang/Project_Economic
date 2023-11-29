@@ -53,8 +53,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input class="form-control" placeholder="Mô tả"
-                                           th:field="*{description}"></input>
+                                    <textarea style="display: block; width: 100%; white-space: pre-line;" class="form-control" placeholder="Mô tả"
+                                           th:field="*{description}"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -100,8 +100,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input class="form-control" th:placeholder="${productEdit.getDescription()}"
-                                           th:field="*{description}"></input>
+                                    <textarea class="form-control" th:placeholder="${productEdit.getDescription()}"
+                                           th:field="*{description}"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">

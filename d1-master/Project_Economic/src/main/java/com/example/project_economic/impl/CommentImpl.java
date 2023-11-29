@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +77,7 @@ public class CommentImpl implements CommentService {
             Try(comments.get(i), commentList);
         }
         for (Comment comment : commentList) {
+            DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("HH:mm, dd/MM/yyyy");
             CommentDTO commentDTO = CommentDTO.builder()
                     .id(comment.getId())
                     .productId(comment.getProductId())
@@ -82,6 +85,7 @@ public class CommentImpl implements CommentService {
                     .userId(comment.getUserId())
                     .userName(this.userRepository.findById(comment.getUserId()).get().getUsername())
                     .step(comment.getStep())
+                    .dateCreate(dateTimeFormatter.format(comment.getCreatedAt()))
                     .build();
             commentDTOS.add(commentDTO);
         }

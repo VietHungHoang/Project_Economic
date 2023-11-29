@@ -131,9 +131,13 @@
                                     <div class="col-md-6">
                                         <input class="form-control" type="text" th:placeholder="${user.getEmail()}" th:field="*{email}">
                                     </div>
-                                <div class="col-md-12">
+                                    <div class="col-md-6">
                                     <input class="form-control" type="text" th:placeholder="${user.getAddress() != null ?
                                             user.getAddress() : 'Địa chỉ'}" th:field="*{address}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" th:placeholder="${user.getPhoneNumber() != null ?
+                                            user.getPhoneNumber() : 'Số điện thoại'}" th:field="*{phoneNumber}">
                                     </div>
                                     <div class="col-md-12">
                                         <button class="btn" type="submit">Cập nhật</button>

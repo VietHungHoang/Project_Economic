@@ -17,4 +17,5 @@ public class CommentDTO {
     private String userName;
     private Long commentParentId;
     private Long step;
+    private String dateCreate;
 }
