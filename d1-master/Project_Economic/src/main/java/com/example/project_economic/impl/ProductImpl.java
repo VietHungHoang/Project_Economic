@@ -1,5 +1,7 @@
 package com.example.project_economic.impl;
 
+import com.example.project_economic.dto.CategoryDto;
+import com.example.project_economic.dto.ProductCategoryDTO;
 import com.example.project_economic.dto.ProductDto;
 import com.example.project_economic.entity.ProductEntity;
 import com.example.project_economic.repository.ProductRepository;

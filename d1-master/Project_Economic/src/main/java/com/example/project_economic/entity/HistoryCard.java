@@ -33,6 +33,7 @@ public class HistoryCard {
     private Integer quantity;
     private String size;
     private String color;
+    private Long discount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

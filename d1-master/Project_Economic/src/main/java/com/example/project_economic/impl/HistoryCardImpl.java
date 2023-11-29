@@ -37,11 +37,12 @@ public class HistoryCardImpl implements HistoryCardService {
 
 
     @Override
-    public void addProductToHistoryCard(Long userId){
+    public void addProductToHistoryCard(Long userId, Long discount){
         DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("HH:mm:ss,dd/MM/yyyy");
 
         UserEntity user=this.userRepository.findById(userId).get();
         List<CartItemEntity> cartItemEntities=this.cartItemRepository.findByUser(user);
+        Long n = (Long)(discount/cartItemEntities.size());
         for (CartItemEntity cartItem:cartItemEntities) {
             HistoryCard historyCard=HistoryCard.builder()
                     .quantity(cartItem.getQuantity())
@@ -51,6 +52,7 @@ public class HistoryCardImpl implements HistoryCardService {
                     .user(user)
                     .size(cartItem.getSize())
                     .color(cartItem.getColor())
+                    .discount(n)
                     .build();
             this.historyCardRepository.save(historyCard);
         }
@@ -69,6 +71,7 @@ public class HistoryCardImpl implements HistoryCardService {
                     .size(cart.getSize())
                     .color(cart.getColor())
                     .productResponse(this.productUtils.enity_to_response(cart.getProduct()))
+                    .discount(cart.getDiscount())
                     .build();
         }).collect(Collectors.toList());
         return historyCartDtos;

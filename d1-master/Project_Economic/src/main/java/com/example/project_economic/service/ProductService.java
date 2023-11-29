@@ -1,5 +1,7 @@
 package com.example.project_economic.service;
 
+import com.example.project_economic.dto.CountProuductDto;
+import com.example.project_economic.dto.ProductCategoryDTO;
 import com.example.project_economic.dto.ProductDto;
 import com.example.project_economic.entity.ProductEntity;
 import com.example.project_economic.response.PageProductResponse;
@@ -15,9 +17,11 @@ public interface ProductService {
     ProductResponse save(ProductDto productDto, MultipartFile file);
     ProductResponse update(ProductDto productDto, Long productId,MultipartFile file);
     ProductResponse findById(Long productId);
+
     void deleteById(Long productId);
     void activeById(Long productId);
     void likeById(Long productId);
+
 
     List<Object[]> countProductByCategoryId();
     ProductEntity findByIdInRescontroller(Long id);

@@ -94,7 +94,7 @@
                                 </a>
                                 <div class="product-action">
                                     <input type="hidden" th:value="${product.id}"/>
-                                    <a class="addproducttocard"><i class="fa fa-cart-plus"></i></a>
+<!--                                    <a class="addproducttocard"><i class="fa fa-cart-plus"></i></a>-->
                                     <a th:href="@{/api/products/like/(id=${product.getId()})}">
                                         <div type="button"></div>
                                         <i class="fa fa-heart"></i>
@@ -245,7 +245,7 @@
                                 </a>
                                 <div class="product-action">
                                     <input type="hidden" th:value="${product.id}"/>
-                                    <a class="addproducttocard"><i class="fa fa-cart-plus"></i></a>
+<!--                                    <a class="addproducttocard"><i class="fa fa-cart-plus"></i></a>-->
                                     <a href="#"><i class="fa fa-heart"></i></a>
                                     <a th:onclick="searchProductById([[${product.id}]])"><i class="fa fa-search"></i></a>
                                 </div>

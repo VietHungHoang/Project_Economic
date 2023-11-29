@@ -21,12 +21,15 @@ public class HistoryCartDto {
     private String size;
     private String color;
     private Integer quantity;
+    private Long discount;
     public Long sumTotalInCartHistory(){
         return this.quantity*this.productResponse.getSalePrice();
     }
 
     public String sumTotalInCartHistoryFormat(){
-        String formattedNumber = (this.quantity*this.productResponse.getSalePrice()) + "";
+        Long money = (Long)(this.quantity*this.productResponse.getSalePrice());
+        if(this.discount != null) money -= this.discount;
+        String formattedNumber = (money) + "";
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < formattedNumber.length(); i++) {
             char currentChar = formattedNumber.charAt(i);

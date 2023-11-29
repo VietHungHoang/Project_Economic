@@ -19,7 +19,6 @@ public class CartController {
     @Autowired
     private CartItemService cartItemService;
     @Autowired
-    private ProductService productService;
     private UserService userService;
 
     @PostMapping("/update/{cardId}/{quantity}")
@@ -61,9 +60,4 @@ public class CartController {
 
         return this.cartItemService.countCart(userId);
     }
-//    @PostMapping("/discount/")
-//    public String addDiscount(){
-//
-//    }
-
 }

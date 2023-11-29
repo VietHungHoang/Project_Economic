@@ -19,14 +19,14 @@ public class HistoryCardController {
     private final CartItemService cartItemService;
     private final EmailSenderService emailSenderService;
 
-    @PostMapping("/add/{userId}")
-    public String addProductToHistoryCard(@PathVariable Long userId){
+    @PostMapping("/add/{userId}/{money}")
+    public String addProductToHistoryCard(@PathVariable Long userId, @PathVariable Long money){
         List<CartItemResponse> cartItemResponses=this.cartItemService.listCartItem(userId);
         try{
             List<Long> ids=cartItemResponses.stream().map((cart)->{
                 return cart.getProductResponse().getId();
             }).collect(Collectors.toList());
-            this.historyCardService.addProductToHistoryCard(userId);
+            this.historyCardService.addProductToHistoryCard(userId, money);
             this.emailSenderService.sendEmail(userId);
             this.cartItemService.deleteAllCartByUserId(userId);
             return "add success";

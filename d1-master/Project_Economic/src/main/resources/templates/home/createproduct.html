@@ -218,8 +218,8 @@
                             </thead>
                             <tbody>
                             <tr th:each="count:${countProductByCategory}">
-                                <th scope="row" th:text="${categories.get(1).getName()}"></th>
-<!--                                <td th:text="${count[1]}">Mark</td>-->
+                                <th scope="row" th:text="${categories.get(count.getCategoryId() - 1).getName()}"></th>
+                                <td th:text="${count.getCount()}">Mark</td>
                             </tr>
                             </tbody>
                         </table>

@@ -20,7 +20,9 @@ import java.util.List;
 public class EmailSenderImpl implements EmailSenderService {
     @Autowired
     private final JavaMailSender mailSender;
+    @Autowired
     private final CartItemRepository cartItemRepository;
+    @Autowired
     private final UserRepository userRepository;
 
     public EmailSenderImpl(JavaMailSender mailSender, CartItemRepository cartItemRepository, UserRepository userRepository){
@@ -56,11 +58,11 @@ public class EmailSenderImpl implements EmailSenderService {
             body += "Số lượng: " + historyCard.getQuantity() + "\n";
             body += "Kích thước: " + historyCard.getSize() + "\n";
             body += "Màu sắc: " + historyCard.getColor() + "\n";
-            body += "Số tiền: " + historyCard.getProduct().getSalePrice() + "₫\n\n";
+            body += "Số tiền: " + (historyCard.getDiscount() != null ? historyCard.getProduct().getSalePrice() - historyCard.getDiscount() : historyCard.getProduct().getSalePrice()) + "₫\n\n";
             totalMoney += cartItem.totalInCartItem();
         }
         if(totalMoney == 0) return "Không có sản phẩm trong giỏ hàng";
-        body += "Tổng số tiền bạn phải thanh toán là: " + totalMoney + '₫';
+        body += "Tổng số tiền bạn phải thanh toán là: " + totalMoney + "₫\n";
         body += "Địa chỉ nhận hàng: " + user.getAddress() + "\n";
         body += "Số điện thoại người nhận: " + user.getPhoneNumber() + "\n";
                 message.setText(body);

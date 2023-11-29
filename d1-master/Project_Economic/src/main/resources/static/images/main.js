@@ -509,8 +509,8 @@ function addCommentParent(comment) {
                                                         Rep
                                                     </button>
                                                     <div style="width: 100%;display: none" class="form-rep-comment${comment.id}">
-                                                        <input name="comment" placeholder="Write a comment" id="textarea-comment-rep${comment.id}"></input>
-                                                        <button type="submit" id="btn-comment-rep" onclick="postRepComment(${comment.id})" >Rep Comment</button>
+                                                        <input name="comment" placeholder="Viết bình luận" id="textarea-comment-rep${comment.id}"></input>
+                                                        <button type="submit" id="btn-comment-rep" onclick="postRepComment(${comment.id})" >Phản hồi</button>
                                                     </div>
                                              </div>
                                             </div>
@@ -584,8 +584,8 @@ function addCommentRep(comment) {
                                                         Rep
                                                     </button>
                                                     <div style="width: 100%;display: none" class="form-rep-comment${comment.id}">
-                                                        <input name="comment" placeholder="Write a comment" id="textarea-comment-rep${comment.id}"></input>
-                                                        <button type="submit" id="btn-comment-rep" onclick="postRepComment(${comment.id})" class="btn1_repcomment">Rep Comment</button>
+                                                        <input name="comment" placeholder="Viết bình luận" id="textarea-comment-rep${comment.id}"></input>
+                                                        <button type="submit" id="btn-comment-rep" onclick="postRepComment(${comment.id})" class="btn1_repcomment">Phản hồi</button>
                                                     </div>
                                              </div>
                                              <div>

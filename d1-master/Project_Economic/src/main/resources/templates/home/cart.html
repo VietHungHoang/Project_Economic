@@ -71,10 +71,13 @@
             <div class="col-lg-4">
                 <div class="cart-page-inner">
                     <div class="row">
+                        <div class="col-md-12" id="valid-show-notice" style="display: none; margin-bottom: 10px">
+                            <p3>Vui lòng nhập đầy đủ thông tin về số điện thoại và địa chỉ nhận hàng</p3>
+                        </div>
                         <div class="col-md-12">
                             <div class="coupon">
-                                <input type="text" placeholder="Mã giảm giá">
-                                <button>Áp dụng</button>
+                                <input type="text" id="discount-context" placeholder="Mã giảm giá">
+                                <button onclick="get_discount()">Áp dụng</button>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -83,7 +86,9 @@
                                     <h2>Tổng<span class="grandtotalcart"></span></h2>
                                 </div>
                                 <div class="cart-btn">
-                                    <button onclick="buy_product()">Mua ngay</button>
+                                    <button th:if="${user.getPhoneNumber() != null && user.getAddress() != null}" onclick="buy_product()">Mua ngay</button>
+
+                                    <button th:if="${user.getPhoneNumber() == null || user.getAddress() == null}" onclick="check_account()">Mua ngay</button>
                                 </div>
                             </div>
                         </div>
@@ -121,8 +126,33 @@
 <script src="/images/main.js"></script>
 </body>
 <script th:inline="javascript">
+    var userAddress = [[${user.getAddress()}]];
+    var userPhoneNumber = [[${user.getPhoneNumber()}]];
+    var discountMoney = 0;
     sumTotal();
+    function check_account() {
+        if (userAddress == null || userPhoneNumber == null) {
+            document.getElementById("valid-show-notice").style.display = "block";
+        }
+    }
 
+    function get_discount(){
+        var discountName = document.getElementById("discount-context").value;
+        var url="/api/carts/"+ discountName;
+        $.ajax({
+            type:"POST",
+            url:url,
+            success:function (res){
+                console.log(res);
+
+                discountMoney += res;
+                sumTotal();
+            },
+            error:function (xhr,status,error){
+                console.log("nol");
+            }
+        })
+    }
 
     $('.qtyincart button').on('click', function () {
         var $button = $(this);
@@ -170,6 +200,8 @@
             total += parseFloat(element.innerHTML)
             numbercart++
         })
+        if(total - discountMoney > 0) total -= discountMoney;
+        else total = 0;
         chageFragment(numbercart)
         changeNumberCart(numbercart)
         numbercart=0;
@@ -209,14 +241,14 @@
                 break;
             }
         }
-        var url="/api/history/add/"+userId;
+        var url="/api/history/add/"+userId+"/"+discountMoney;
         $.ajax({
             type:"POST",
-            url:url,
-            success:function (res){
+            url:url
+            // ,data: {money : discountMoney}
+            ,success:function (res){
                 console.log(res);
                 if(res=="add fail"){
-
                 }else{
                     removeAll_list_cartItem()
                 }
@@ -226,6 +258,7 @@
             }
         })
 
+
     }
 
     function removeAll_list_cartItem(){
@@ -233,9 +266,6 @@
             item.remove();
         });
     }
-
-
-
     getUserNameFromCookie()
 </script>
 </html>

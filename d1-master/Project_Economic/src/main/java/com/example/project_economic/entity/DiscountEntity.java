@@ -17,4 +17,5 @@ public class DiscountEntity {
     @Column(name = "name",unique = true,nullable = false)
     private String name;
     private String expiryDate;
+    private Long money;
 }

@@ -170,15 +170,15 @@
                                                     </button>
 
                                                     <div style="width: 100%;display: none" th:class="${'form-rep-comment'+comment.getId()}">
-                                                        <input name="comment" placeholder="Write a comment" th:id="${'textarea-comment-rep'+comment.getId()}"></input>
-                                                        <button type="submit" id="btn-comment-rep" th:onclick="postRepComment([[${comment.getId()}]])">Rep Comment</button>
+                                                        <input name="comment" placeholder="Viết bình luận" th:id="${'textarea-comment-rep'+comment.getId()}"></input>
+                                                        <button type="submit" id="btn-comment-rep" th:onclick="postRepComment([[${comment.getId()}]])">Phản hồi</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <br>
                                         <div  class="comment-form reviews-submit">
-                                            <h4>Give your Review:</h4>
+                                            <h4>Đánh giá sản phẩm:</h4>
                                             <div class="ratting">
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
@@ -187,8 +187,8 @@
                                                 <i class="far fa-star"></i>
                                             </div>
                                             <div style="width: 100%" class="col-sm-12 row form">
-                                                <textarea style="display: block; width: 100%" name="comment" placeholder="Review" id="textarea-comment"></textarea>
-                                                <button style="display: block; width:100%; margin-top:10px;" type="submit" id="btn-comment" th:onclick="postFirstCommentInPost([[${productId}]])">Comment</button>
+                                                <textarea style="display: block; width: 100%" name="comment" placeholder="Viết đánh giá" id="textarea-comment"></textarea>
+                                                <button style="display: block; width:100%; margin-top:10px;" type="submit" id="btn-comment" th:onclick="postFirstCommentInPost([[${productId}]])">Gửi</button>
                                             </div>
                                         </div>
                                     </div>
@@ -256,7 +256,7 @@
                                 <div class="col-md-4" th:each="product:${products}">
                                     <div class="product-item">
                                         <div class="product-title">
-                                            <a href="#" th:text="${product.getName()}"></a>4
+                                            <a href="#" th:text="${product.getName()}"></a>
                                             <div class="ratting">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -271,7 +271,7 @@
                                             </a>
                                             <div class="product-action">
                                                 <input type="hidden" th:value="${product.id}"/>
-                                                <a class="addproducttocard"><i class="fa fa-cart-plus"></i></a>
+<!--                                                <a class="addproducttocard"><i class="fa fa-cart-plus"></i></a>-->
                                                 <a href="#"><i class="fa fa-heart"></i></a>
                                                 <a th:onclick="searchProductById([[${product.id}]])"><i class="fa fa-search"></i></a>
                                             </div>

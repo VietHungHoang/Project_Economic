@@ -4,10 +4,32 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <style>
+        body {
+
+            background-image: url('/images/3.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+        .btn {
+            background-color: #D2B48C;
+            border: 2px solid #8B4513;
+            color: white;
+            margin: 5px;
+        }
+
+    </style>
 </head>
-<body >
-<div class="container align-items-center flex-column">
-    <h1>Welcome to ShopDev</h1>
+<body>
+<div >
+
     <a type="button" class="btn btn-outline-primary" th:href="@{/api/users/login}">Login</a>
     <a type="button" class="btn btn-outline-primary" th:href="@{/api/users/register}">Register</a>
     <a type="button" class="btn btn-outline-primary" th:href="@{/api/users/homepage}">Continue</a>
