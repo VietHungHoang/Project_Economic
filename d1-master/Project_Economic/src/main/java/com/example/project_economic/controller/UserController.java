@@ -1,20 +1,16 @@
 package com.example.project_economic.controller;
 
 import com.example.project_economic.config.UserInfoDetails;
-import com.example.project_economic.dto.ProductDto;
 import com.example.project_economic.entity.CategoryEntity;
 import com.example.project_economic.entity.UserEntity;
 import com.example.project_economic.jwt.JwtService;
 import com.example.project_economic.response.ProductResponse;
 import com.example.project_economic.service.*;
-import jakarta.servlet.http.HttpSession;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -98,7 +94,7 @@ public class UserController {
     @GetMapping("/fail")
     public String loginFail(Model model){
         model.addAttribute("error","Username or password is valid!");
-        model.addAttribute("UserEntity", new UserEntity());
+        model.addAttribute("userEntity", new UserEntity());
         return "login/index";
     }
     @GetMapping("/product-detail")
@@ -144,6 +140,8 @@ public class UserController {
 //    }
 
     public List<ProductResponse>findByAllProductActive(){
-        return this.productService.findAllIsActived();
+        int pageSize = 10;
+        int pageNumber = 1;
+        return this.productService.findAllIsActived(pageSize, pageNumber);
     }
 }

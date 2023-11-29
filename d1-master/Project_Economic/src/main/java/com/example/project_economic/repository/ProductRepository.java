@@ -1,7 +1,8 @@
 package com.example.project_economic.repository;
 
 import com.example.project_economic.entity.ProductEntity;
-import com.example.project_economic.response.ProductResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,8 +15,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
     List<Object[]> countProductByCategoryId();
     @Query(value = "select * from products as p inner join categories as c on p.category_id=c.category_id where c.category_id=?1 and c.is_actived=true and p.is_actived=true",nativeQuery = true)
     List<ProductEntity>findAllProductByCategoryId(Long category_id);
-    @Query(value = "select * from products as p where p.is_actived=true and is_deteted=false",nativeQuery = true)
-    List<ProductEntity>findAllProductIsAvtived();
+    @Query(value = "select * from products as p where p.is_actived=true",nativeQuery = true)
+    Page<ProductEntity> findAllProductIsAvtived(Pageable pageable);
 
     @Query(value = "select * from products where name like ?1 limit ?2 offset ?3",nativeQuery = true)
     List<ProductEntity>findAllProductByKeyword(String keyword,Integer pageSize,Integer offsetNumber);

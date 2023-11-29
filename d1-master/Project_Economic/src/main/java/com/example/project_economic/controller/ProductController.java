@@ -4,7 +4,6 @@ import com.example.project_economic.dto.CommentDTO;
 import com.example.project_economic.dto.CountProuductDto;
 import com.example.project_economic.dto.Price;
 import com.example.project_economic.dto.ProductDto;
-import com.example.project_economic.entity.ProductEntity;
 import com.example.project_economic.response.PageProductResponse;
 import com.example.project_economic.response.ProductResponse;
 import com.example.project_economic.service.CartItemService;
@@ -12,16 +11,13 @@ import com.example.project_economic.service.CategoryService;
 import com.example.project_economic.service.CommentService;
 import com.example.project_economic.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping(path = "/api/products")
@@ -122,18 +118,22 @@ public class ProductController {
 
     @GetMapping("/like/")
     public String likeProduct(@RequestParam("id") Long id,Model model){
+        int pageSize = 5;
+        int pageNumber = 1;
         this.productService.likeById(id);
         model.addAttribute("categories",this.categoryService.findAllByActived());
-        model.addAttribute("products",this.productService.findAllIsActived());
+        model.addAttribute("products",this.productService.findAllIsActived(pageSize, pageNumber));
         model.addAttribute("prices",prices);
         return "/home/product-list";
     }
 
     @GetMapping("/productdetail/{userId}/{productId}")
     public String showProductDetail(@PathVariable Long userId,@PathVariable Long productId,Model model){
+        int pageSize = 5;
+        int pageNumber = 1;
         model.addAttribute("product",this.productService.findById(productId));
         model.addAttribute("productId",productId);
-        model.addAttribute("products", this.productService.findAllIsActived());
+        model.addAttribute("products", this.productService.findAllIsActived(pageSize, pageNumber));
         model.addAttribute("categories", this.categoryService.findAllByActived());
         if(this.cartItemService.findCartByProductId(productId,userId)){
             model.addAttribute("findProductInCart","already");
@@ -145,8 +145,10 @@ public class ProductController {
 
     @GetMapping("/all")
     public String showAllProduct(Model model){
+        int pageSize = 5;
+        int pageNumber = 1;
         model.addAttribute("categories",this.categoryService.findAllByActived());
-        model.addAttribute("products",this.productService.findAllIsActived());
+        model.addAttribute("products",this.productService.findAllIsActived(pageSize, pageNumber));
         model.addAttribute("prices",prices);
         return "home/product-list";
     }
@@ -165,7 +167,7 @@ public class ProductController {
         model.addAttribute("totalPage",new int[pageProductResponse.getTotalPage()]);
         model.addAttribute("categories",this.categoryService.findAllByActived());
 //        model.addAttribute("products",pageProductResponse.getProductResponses());
-        model.addAttribute("products", this.productService.findAllIsActived());
+        model.addAttribute("products", this.productService.findAllIsActived(pageSize, pageNumber));
         model.addAttribute("prices",prices);
         return "home/product-list";
     }

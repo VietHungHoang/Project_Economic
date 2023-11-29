@@ -1,7 +1,5 @@
 package com.example.project_economic.service;
 
-import com.example.project_economic.dto.CountProuductDto;
-import com.example.project_economic.dto.ProductCategoryDTO;
 import com.example.project_economic.dto.ProductDto;
 import com.example.project_economic.entity.ProductEntity;
 import com.example.project_economic.response.PageProductResponse;
@@ -12,7 +10,7 @@ import java.util.List;
 
 public interface ProductService {
     List<ProductResponse>findAll();
-    List<ProductResponse>findAllIsActived();
+    List<ProductResponse>findAllIsActived(int pageSize, Integer pageNumber);
     List<ProductResponse> findAllProductByUserId(Long userId);
     ProductResponse save(ProductDto productDto, MultipartFile file);
     ProductResponse update(ProductDto productDto, Long productId,MultipartFile file);

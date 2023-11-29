@@ -1,7 +1,5 @@
 package com.example.project_economic.impl;
 
-import com.example.project_economic.dto.CategoryDto;
-import com.example.project_economic.dto.ProductCategoryDTO;
 import com.example.project_economic.dto.ProductDto;
 import com.example.project_economic.entity.ProductEntity;
 import com.example.project_economic.repository.ProductRepository;
@@ -14,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -38,8 +37,10 @@ public class ProductImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> findAllIsActived() {
-        List<ProductEntity>productEntities=this.productRepository.findAllProductIsAvtived();
+    public List<ProductResponse> findAllIsActived(int pageSize, Integer pageNumber) {
+        pageNumber -=1;
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("product_id").descending());
+        Page<ProductEntity>productEntities=this.productRepository.findAllProductIsAvtived(pageable);
         List<ProductResponse>productDtos=productEntities.stream().map((product)->{
             return this.enity_to_response(product);
         }).collect(Collectors.toList());
