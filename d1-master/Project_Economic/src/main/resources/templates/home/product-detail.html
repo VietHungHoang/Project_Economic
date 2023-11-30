@@ -13,7 +13,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
 
-        <!-- CSS Libraries -->
+        <!-- CSS -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
@@ -130,7 +130,6 @@
                                         </div>
                                         <div class="action">
                                             <button class="btn btnAddProductToCart" href="#"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
-<!--                                            <button class="btn" href="#"><i class="fa fa-shopping-bag"></i>Mua ngay</button>-->
                                             <button style="margin-left: 7px" onclick="getNumberCartInEveryPage()" class="btn btnAddProductToCart"><i class="fa fa-shopping-bag"></i>Mua ngay</button>
                                         </div>
                                     </div>
@@ -150,7 +149,6 @@
 
                                 <div class="tab-content">
                                     <div id="description" class="container tab-pane active">
-<!--                                        <h4>Product description</h4>-->
                                         <p th:text="${product.getDescription()}"></p>
                                     </div>
                                     <div id="reviews" class="container comment-form container tab-pane fade">
@@ -192,47 +190,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Reviews -->
-<!--                                    <div id="reviews" class="container tab-pane fade">-->
-<!--                                        <div class="reviews-submitted">-->
-<!--                                            <div class="ratting">-->
-<!--                                                <i class="fa fa-star"></i>-->
-<!--                                                <i class="fa fa-star"></i>-->
-<!--                                                <i class="fa fa-star"></i>-->
-<!--                                                <i class="fa fa-star"></i>-->
-<!--                                                <i class="fa fa-star"></i>-->
-<!--                                            </div>-->
-<!--                                            <p>-->
-<!--                                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.-->
-<!--                                            </p>-->
-<!--                                        </div>-->
-<!--                                        <div class="reviews-submit">-->
-
-<!--                                            <h4>Give your Review:</h4>-->
-
-<!--                                            <div class="ratting">-->
-<!--                                                <i class="far fa-star"></i>-->
-<!--                                                <i class="far fa-star"></i>-->
-<!--                                                <i class="far fa-star"></i>-->
-<!--                                                <i class="far fa-star"></i>-->
-<!--                                                <i class="far fa-star"></i>-->
-<!--                                            </div>-->
-<!--                                            <div class="row form">-->
-<!--&lt;!&ndash;                                                <div class="col-sm-6">&ndash;&gt;-->
-<!--&lt;!&ndash;                                                    <input type="text" placeholder="Name">&ndash;&gt;-->
-<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                                <div class="col-sm-6">&ndash;&gt;-->
-<!--&lt;!&ndash;                                                    <input type="email" placeholder="Email">&ndash;&gt;-->
-<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
-<!--                                                <div class="col-sm-12">-->
-<!--                                                    <textarea placeholder="Review"></textarea>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-sm-12">-->
-<!--                                                    <button>Submit</button>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -271,7 +228,6 @@
                                             </a>
                                             <div class="product-action">
                                                 <input type="hidden" th:value="${product.id}"/>
-<!--                                                <a class="addproducttocard"><i class="fa fa-cart-plus"></i></a>-->
                                                 <a href="#"><i class="fa fa-heart"></i></a>
                                                 <a th:onclick="searchProductById([[${product.id}]])"><i class="fa fa-search"></i></a>
                                             </div>
@@ -282,93 +238,14 @@
                                         </div>
                                     </div>
                                 </div>
-<!--                                <div class="product-item">-->
-<!--                                    <div class="product-title">-->
-<!--                                        <a href="#">Product Name</a>-->
-<!--                                        <div class="ratting">-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="product-image">-->
-<!--                                        <a th:href="product-detail.html">-->
-<!--                                            <img th:src="@{/images/product-7.jpg}" alt="Product Image">-->
-<!--                                        </a>-->
-<!--                                        <div class="product-action">-->
-<!--                                            <a href="#"><i class="fa fa-cart-plus"></i></a>-->
-<!--                                            <a href="#"><i class="fa fa-heart"></i></a>-->
-<!--                                            <a href="#"><i class="fa fa-search"></i></a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="product-price">-->
-<!--                                        <h3><span>$</span>99</h3>-->
-<!--                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="product-item">-->
-<!--                                    <div class="product-title">-->
-<!--                                        <a href="#">Product Name</a>-->
-<!--                                        <div class="ratting">-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="product-image">-->
-<!--                                        <a th:href="product-detail.html">-->
-<!--                                            <img th:src="@{/images/product-8.jpg}" alt="Product Image">-->
-<!--                                        </a>-->
-<!--                                        <div class="product-action">-->
-<!--                                            <a href="#"><i class="fa fa-cart-plus"></i></a>-->
-<!--                                            <a href="#"><i class="fa fa-heart"></i></a>-->
-<!--                                            <a href="#"><i class="fa fa-search"></i></a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="product-price">-->
-<!--                                        <h3><span>$</span>99</h3>-->
-<!--                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="product-item">-->
-<!--                                    <div class="product-title">-->
-<!--                                        <a href="#">Product Name</a>-->
-<!--                                        <div class="ratting">-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                            <i class="fa fa-star"></i>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="product-image">-->
-<!--                                        <a th:href="product-detail.html">-->
-<!--                                            <img th:src="@{/images/product-9.jpg}" alt="Product Image">-->
-<!--                                        </a>-->
-<!--                                        <div class="product-action">-->
-<!--                                            <a href="#"><i class="fa fa-cart-plus"></i></a>-->
-<!--                                            <a href="#"><i class="fa fa-heart"></i></a>-->
-<!--                                            <a href="#"><i class="fa fa-search"></i></a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="product-price">-->
-<!--                                        <h3><span>$</span>99</h3>-->
-<!--                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>-->
-<!--                                    </div>-->
-<!--                                </div>-->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Product Detail End -->
 
-        <!-- Footer Bottom Start -->
+        <!-- Footer -->
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">

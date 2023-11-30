@@ -8,7 +8,7 @@
 <div class="breadcrumb-wrap">
     <div class="container-fluid">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Estore</a></li>
+            <li class="breadcrumb-item"><a href="#">Pstore</a></li>
             <li class="breadcrumb-item active">Giỏ hàng</li>
         </ul>
     </div>
@@ -54,7 +54,6 @@
                                 <td th:text="${cartITem.getColor()}"></td>
                                 <td th:text="${cartITem.getSize()}"></td>
                                 <td th:id="totalmaney+${cartITem.getId()}" th:class="totalmaney" th:text="${cartITem.totalInCartItem()} + '₫'" >
-                                    <!--                                    [[${cartITem.totalInCartItem()}]]-->
                                 </td>
                                 <td class="td_removecard">
                                     <button class="btn_removecart"><i class="fa fa-trash"></i>
@@ -108,7 +107,7 @@
     </div>
 </div>
 
-<!-- Footer Bottom Start -->
+<!-- Footer-->
 <div class="footer-bottom">
     <div class="container">
         <div class="row">
@@ -125,13 +124,13 @@
 <!-- Back to Top -->
 <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-<!-- JavaScript Libraries -->
+<!-- JavaScript-->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="/lib/easing/easing.min.js"></script>
 <script src="/lib/slick/slick.min.js"></script>
 
-<!-- Javascript -->
+<!--Template Javascript -->
 <script src="/images/main.js"></script>
 </body>
 <script th:inline="javascript">

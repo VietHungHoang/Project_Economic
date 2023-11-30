@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
           rel="stylesheet">
 
-    <!-- CSS Libraries -->
+    <!-- CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link th:href="@{/lib/slick/slick.css}" rel="stylesheet">
@@ -94,7 +94,6 @@
                                 </a>
                                 <div class="product-action">
                                     <input type="hidden" th:value="${product.id}"/>
-<!--                                    <a class="addproducttocard"><i class="fa fa-cart-plus"></i></a>-->
                                     <a th:href="@{/api/products/like/(id=${product.getId()})}">
                                         <div type="button"></div>
                                         <i class="fa fa-heart"></i>
@@ -245,7 +244,6 @@
                                 </a>
                                 <div class="product-action">
                                     <input type="hidden" th:value="${product.id}"/>
-<!--                                    <a class="addproducttocard"><i class="fa fa-cart-plus"></i></a>-->
                                     <a href="#"><i class="fa fa-heart"></i></a>
                                     <a th:onclick="searchProductById([[${product.id}]])"><i class="fa fa-search"></i></a>
                                 </div>
@@ -262,7 +260,7 @@
 </div>
 
 <div style="margin-top: 50px"></div>
-    <!-- Footer Bottom Start -->
+    <!-- Footer -->
     <div class="footer-bottom">
         <div class="container">
             <div class="row">

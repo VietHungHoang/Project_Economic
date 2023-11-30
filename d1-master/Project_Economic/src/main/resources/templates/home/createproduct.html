@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>E Store</title>
+    <title>P Store - Tạo sản phẩm</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     <!-- Favicon -->
@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
           rel="stylesheet">
 
-    <!-- CSS Libraries -->
+    <!-- CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link th:href="@{/lib/slick/slick.css}" rel="stylesheet">
@@ -34,9 +34,7 @@
         </ul>
     </div>
 </div>
-<!-- Breadcrumb End -->
-
-<!-- Checkout Start -->
+<!-- Checkout -->
 <div class="checkout">
     <div class="container-fluid">
         <div class="row">
@@ -78,9 +76,6 @@
                                     </option>
                                 </select>
                             </div>
-<!--                            <div class="col-md-6">-->
-<!--                                <input class="form-control" type="text" placeholder="Image name" th:field="*{image}">-->
-<!--                            </div>-->
                             <div class="col-md-6">
                                 <label>Chọn ảnh</label>
                                 <input type="file" name="imageProduct" id="imageProduct">
@@ -125,9 +120,6 @@
                                     </option>
                                 </select>
                             </div>
-<!--                            <div class="col-md-6">-->
-<!--                                <input class="form-control" type="text" placeholder="Image name" th:field="*{image}">-->
-<!--                            </div>-->
                             <img th:src = "${productEdit.getImage_url()}" style="width: 50px;height: 50px">
                             <div class="col-md-6">
                                 <label>Chọn ảnh</label>
@@ -159,8 +151,7 @@
                             <tr th:each="product,index:${allproducts}">
                                 <td th:text="${index.count}"></td>
                                 <td th:text="${product.getName()}"></td>
-<!--                                <td th:text="${product.getDescription()}"></td>-->
-                                <td></td>
+                                <td th:text="${#strings.abbreviate(product.getDescription(), 5)}"></td>
                                 <td th:text="${product.getCostPriceFormat()}"></td>
                                 <td th:text="${product.getSalePriceFormat()}"></td>
                                 <td >
@@ -196,11 +187,10 @@
                                 </td>
                                 <td th:class="btneditproduct">
                                     <a th:href="@{/api/products/edit/(id=${product.getId()})}">
-                                        <img th:src="@{/images/edit.svg}">
+                                        <img class="ionicon md" th:src="@{/images/edit.svg}">
                                     </a>
                                 </td>
                             </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -230,9 +220,7 @@
     </div>
 
 </div>
-<!-- Checkout End -->
-
-<!-- Footer Bottom Start -->
+<!-- Footer -->
 <div class="footer-bottom">
     <div class="container">
         <div class="row">
@@ -249,7 +237,7 @@
 <!-- Back to Top -->
 <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-<!-- JavaScript Libraries -->
+<!-- JavaScript-->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="/lib/easing/easing.min.js"></script>
@@ -285,13 +273,8 @@
         url: "/api/products/create/" + {usedId},
         data: { userId: userId },
     }).done(function (res) {
-        console.log('Phản hồi về backend:', res);
     }).fail(function (error) {
-        console.error('Lỗi khi gửi dữ liệu đến backend:', error);
     });
-
-
-
 
 </script>
 </body>

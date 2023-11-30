@@ -20,6 +20,7 @@ public class ProductEntity {
     private Long id;
 
     private String name;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private Long costPrice;
     private Long salePrice;
