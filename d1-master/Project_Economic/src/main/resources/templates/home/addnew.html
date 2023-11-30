@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>P Store</title>
+    <title>P Store - Danh mục</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -25,7 +25,7 @@
 <div class="breadcrumb-wrap">
     <div class="container-fluid">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Estore</a></li>
+            <li class="breadcrumb-item"><a href="#">Pstore</a></li>
             <li class="breadcrumb-item active">Danh mục</li>
         </ul>
     </div>
@@ -123,6 +123,26 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="checkout-inner">
+                    <div class="checkout-summary">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Danh mục</th>
+                                <th scope="col">Số lượng sản phẩm</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="count:${countProductByCategory}">
+                                <th scope="row" th:text="${allcategories.get(count.getCategoryId() - 1).getName()}"></th>
+                                <td th:text="${count.getCount()}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

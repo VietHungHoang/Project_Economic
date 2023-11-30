@@ -51,7 +51,7 @@ public class CategoryImpl implements CategoryService {
         CategoryEntity categoryEntity=categoryRepository.findById(id).get();
         categoryEntity.set_deleted(true);
         categoryEntity.set_actived(false);
-        categoryEntity.updateTime();
+//        categoryEntity.updateTime();
         categoryRepository.save(categoryEntity);
     }
 
@@ -60,7 +60,7 @@ public class CategoryImpl implements CategoryService {
         CategoryEntity category = categoryRepository.getById(id);
         category.set_actived(true);
         category.set_deleted(false);
-        category.updateTime();
+//        category.updateTime();
         categoryRepository.save(category);
     }
 

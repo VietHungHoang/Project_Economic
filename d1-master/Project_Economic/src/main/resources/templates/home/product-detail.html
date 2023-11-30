@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
     <head>
         <meta charset="utf-8">
-        <title>E Store - Detail Product</title>
+        <title>P Store - Chi tiết sản phẩm</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
         <!-- Favicon -->
@@ -31,7 +31,7 @@
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Estore</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pstore</a></li>
                     <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
                     <li class="breadcrumb-item active">Chi tiết</li>
                 </ul>
@@ -48,19 +48,19 @@
                                 <input type="hidden" th:value="${product.id}" class="productId_addToCart">
                                 <div class="col-md-5">
                                     <div class="product-slider-single normal-slider">
-                                        <img th:src = "${product.getImage_url()}" alt="Product Image">
-                                        <img th:src = "${product.getImage_url()}" alt="Product Image">
-                                        <img th:src = "${product.getImage_url()}" alt="Product Image">
-                                        <img th:src = "${product.getImage_url()}" alt="Product Image">
-                                        <img th:src = "${product.getImage_url()}" alt="Product Image">
+                                        <img th:src = "${product.getImage_url()}" alt="Hình ảnh">
+                                        <img th:src = "${product.getImage_url()}" alt="Hình ảnh">
+                                        <img th:src = "${product.getImage_url()}" alt="Hình ảnh">
+                                        <img th:src = "${product.getImage_url()}" alt="Hình ảnh">
+                                        <img th:src = "${product.getImage_url()}" alt="Hình ảnh">
                                     </div>
                                     <div class="product-slider-single-nav normal-slider">
-                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
-                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
-                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
-                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
-                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
-                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Hình ảnh"></div>
+                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Hình ảnh"></div>
+                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Hình ảnh"></div>
+                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Hình ảnh"></div>
+                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Hình ảnh"></div>
+                                        <div class="slider-nav-img"><img th:src = "${product.getImage_url()}" alt="Hình ảnh"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
@@ -224,7 +224,7 @@
                                         </div>
                                         <div class="product-image">
                                             <a th:href="product-detail.html">
-                                                <img th:src="${product.getImage_url()}" alt="Product Image">
+                                                <img th:src="${product.getImage_url()}" alt="Hình ảnh">
                                             </a>
                                             <div class="product-action">
                                                 <input type="hidden" th:value="${product.id}"/>

@@ -40,6 +40,8 @@ public class UserController {
     private CartItemService cartItemService;
     @Autowired
     private HistoryCardService historyCardService;
+    @Autowired
+    private ProductController productController;
 
     @GetMapping("/index")
     public String welcomePage(){
@@ -121,6 +123,7 @@ public class UserController {
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("category",new CategoryEntity());
         model.addAttribute("allcategories",this.categoryService.findAll());
+        model.addAttribute("countProductByCategory",productController.countProuductDtos());
         return "home/addnew";
     }
 
@@ -152,7 +155,12 @@ public class UserController {
 //
 //    }
 
+//    public List<ProductResponse>findByAllProductActive(){
+//        return this.productService.findAllIsActived();
+//    }
     public List<ProductResponse>findByAllProductActive(){
+        int pageSize = 10;
+        int pageNumber = 1;
         return this.productService.findAllIsActived();
     }
 }

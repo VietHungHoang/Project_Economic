@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="utf-8">
-    <title>E Store</title>
+    <title>P Store - Tài khoản</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Favicon -->
@@ -29,7 +29,7 @@
 <div class="breadcrumb-wrap">
     <div class="container-fluid">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Estore</a></li>
+            <li class="breadcrumb-item"><a href="#">Pstore</a></li>
             <li class="breadcrumb-item ">Tài khoản</li>
         </ul>
     </div>
@@ -119,9 +119,6 @@
                         </div>
 
                     </div>
-                    <!--                            <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">-->
-
-                    <!--                            </div>-->
                     <form class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav"
                           th:action="@{/api/users/update/(id=${user.id})}" method="post" th:object="${users}">
                         <h4>Thay đổi thông tin</h4>
@@ -146,23 +143,24 @@
                             </div>
                         </div>
                     </form>
+
+<!--                    <h4>Đổi mật khẩu</h4>-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-12">-->
+<!--                            <input class="form-control" type="text" placeholder="Mật khẩu hiện tại">-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6">-->
+<!--                            <input class="form-control" type="text" placeholder="Mật khẩu mới">-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6">-->
+<!--                            <input class="form-control" type="text" placeholder="Nhập lại mật khẩu">-->
+<!--                        </div>-->
+<!--                        <div class="col-md-12">-->
+<!--                            <button class="btn">Lưu thay đổi</button>-->
+<!--                            <br><br>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div style="margin-bottom:130px"></div>
-                    <!--                                <h4>Đổi mật khẩu</h4>-->
-                    <!--                                <div class="row">-->
-                    <!--                                    <div class="col-md-12">-->
-                    <!--                                        <input class="form-control" type="text" placeholder="Mật khẩu hiện tại">-->
-                    <!--                                    </div>-->
-                    <!--                                    <div class="col-md-6">-->
-                    <!--                                        <input class="form-control" type="text" placeholder="Mật khẩu mới">-->
-                    <!--                                    </div>-->
-                    <!--                                    <div class="col-md-6">-->
-                    <!--                                        <input class="form-control" type="text" placeholder="Nhập lại mật khẩu">-->
-                    <!--                                    </div>-->
-                    <!--                                    <div class="col-md-12">-->
-                    <!--                                        <button class="btn">Lưu thay đổi</button>-->
-                    <!--                                        <br><br>-->
-                    <!--                                    </div>-->
-                    <!--                                </div>-->
                 </div>
             </div>
         </div>

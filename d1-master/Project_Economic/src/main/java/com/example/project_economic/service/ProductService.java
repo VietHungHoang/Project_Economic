@@ -13,6 +13,7 @@ import java.util.List;
 public interface ProductService {
     List<ProductResponse>findAll();
     List<ProductResponse>findAllIsActived();
+    List<ProductResponse>findAllIsActived(int pageSize, Integer pageNumber);
     List<ProductResponse> findAllProductByUserId(Long userId);
     ProductResponse save(ProductDto productDto, MultipartFile file);
     ProductResponse update(ProductDto productDto, Long productId,MultipartFile file);

@@ -34,6 +34,7 @@ public class ProductController {
     private CommentService commentService;
     @Autowired
     private ProductService productService;
+
     List<Price>prices=List.of(
             new Price(0,100000),
             new Price(100000,200000),
@@ -73,7 +74,6 @@ public class ProductController {
         model.addAttribute("countProductByCategory",this.countProuductDtos());
         model.addAttribute("categories", this.categoryService.findAll());
         model.addAttribute("allproducts", this.productService.findAllProductByUserId(productDto.getSellerId()));
-//        getCategoryId()
         return "home/createproduct";
     }
 
@@ -95,7 +95,7 @@ public class ProductController {
         model.addAttribute("countProductByCategory",this.countProuductDtos());
         model.addAttribute("categories", this.categoryService.findAll());
         model.addAttribute("product", new ProductDto());
-        model.addAttribute("allproducts", this.productService.findAllProductByUserId(productDto.getSellerId()));
+        model.addAttribute("allproducts", this.productService.findAllProductByUserId(productService.findById(productDto.getId()).getUserEntity().getId()));
         return "/home/createproduct";
     }
 
@@ -122,6 +122,8 @@ public class ProductController {
 
     @GetMapping("/like/")
     public String likeProduct(@RequestParam("id") Long id,Model model){
+        int pageSize = 9;
+        int pageNumber = 1;
         this.productService.likeById(id);
         model.addAttribute("categories",this.categoryService.findAllByActived());
         model.addAttribute("products",this.productService.findAllIsActived());
@@ -131,6 +133,8 @@ public class ProductController {
 
     @GetMapping("/productdetail/{userId}/{productId}")
     public String showProductDetail(@PathVariable Long userId,@PathVariable Long productId,Model model){
+        int pageSize = 5;
+        int pageNumber = 1;
         model.addAttribute("product",this.productService.findById(productId));
         model.addAttribute("productId",productId);
         model.addAttribute("products", this.productService.findAllIsActived());
@@ -145,6 +149,8 @@ public class ProductController {
 
     @GetMapping("/all")
     public String showAllProduct(Model model){
+        int pageSize = 5;
+        int pageNumber = 1;
         model.addAttribute("categories",this.categoryService.findAllByActived());
         model.addAttribute("products",this.productService.findAllIsActived());
         model.addAttribute("prices",prices);
@@ -164,8 +170,8 @@ public class ProductController {
         model.addAttribute("previousPage",pageNumber>1?pageNumber-1:pageNumber);
         model.addAttribute("totalPage",new int[pageProductResponse.getTotalPage()]);
         model.addAttribute("categories",this.categoryService.findAllByActived());
-//        model.addAttribute("products",pageProductResponse.getProductResponses());
-        model.addAttribute("products", this.productService.findAllIsActived());
+//        model.addAttribute("products", this.productService.findAllIsActived());
+        model.addAttribute("products", this.productService.findAllIsActived(pageSize, pageNumber));
         model.addAttribute("prices",prices);
         return "home/product-list";
     }

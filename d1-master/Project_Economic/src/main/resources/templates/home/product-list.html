@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>E Store</title>
+    <title>P Store</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Favicon -->
@@ -90,7 +90,7 @@
                             </div>
                             <div class="product-image">
                                 <a th:href="product-detail.html">
-                                    <img th:src="${product.getImage_url()}" alt="Product Image">
+                                    <img th:src="${product.getImage_url()}" alt="Hình ảnh">
                                 </a>
                                 <div class="product-action">
                                     <input type="hidden" th:value="${product.id}"/>
@@ -240,7 +240,7 @@
                             </div>
                             <div class="product-image">
                                 <a th:href="product-detail.html">
-                                    <img th:src="${product.getImage_url()}" alt="Product Image">
+                                    <img th:src="${product.getImage_url()}" alt="Hình ảnh">
                                 </a>
                                 <div class="product-action">
                                     <input type="hidden" th:value="${product.id}"/>

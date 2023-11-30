@@ -41,7 +41,6 @@ public class CartController {
     ){
         CartItemEntity cartItemEntity=this.cartItemService.addProduct(productId,quantity,userId, "", "");
         List<CartItemResponse>cartItemEntities=this.cartItemService.listCartItem(userId);
-
         return this.cartItemService.countCart(userId);
     }
     @PostMapping("/add1/{productId}/{quantity}/{userId}")
@@ -57,7 +56,6 @@ public class CartController {
         CartItemEntity cartItemEntity=this.cartItemService.addProduct(productId,quantity,userId, size, color);
         List<CartItemResponse>cartItemEntities=this.cartItemService.listCartItem(userId);
         model.addAttribute("cartItems",cartItemEntities);
-
         return this.cartItemService.countCart(userId);
     }
 }
