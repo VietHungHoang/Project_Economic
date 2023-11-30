@@ -16,6 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,8 @@ public class UserController {
     private HistoryCardService historyCardService;
     @Autowired
     private ProductController productController;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/index")
     public String welcomePage(){
@@ -142,22 +145,45 @@ public class UserController {
     public String updateUser(@ModelAttribute("users") UserEntity userEntity, @RequestParam("id") Long userId, Model model){
         try{
             this.userService.update(userEntity, userId);
-            model.addAttribute("users",new UserEntity());
+//            model.addAttribute("users",new UserEntity());
         }catch (Exception exception){
             model.addAttribute("error","error");
+            return "home/my-account";
         }
         model.addAttribute("history_card",this.historyCardService.findByUserId(userId));
         model.addAttribute("user",this.userService.findUserById(userId));
         return "home/my-account";
     }
-//    @PostMapping("/recovery/")
-//    public String recoveryPassword(@ModelAttribute("userEntity") UserEntity userEntity, Model model){
-//
-//    }
 
-//    public List<ProductResponse>findByAllProductActive(){
-//        return this.productService.findAllIsActived();
-//    }
+    @PostMapping("/change-password/")
+    @ResponseBody
+    public Integer changePassword(
+                                 @RequestParam("userId") Long userId,
+                                 @RequestParam("passNow") String passNow,
+                                 @RequestParam("pass1") String pass1,
+                                 @RequestParam("pass2") String pass2,
+                                 Model model){
+        try{
+            UserEntity userEntity = this.userService.findUserById(userId);
+            if(pass1.equals(pass2)){
+                if (passwordEncoder.matches(passNow, this.userService.findUserById(userId).getPassword())){
+                    userEntity.setPassword(passwordEncoder.encode(pass1));
+                    this.userService.update(userEntity, userId);
+                    return 0;
+                }
+                else{
+                    return 1;
+                }
+            }
+            else return 2;
+        }catch (Exception exception){
+            model.addAttribute("error","error");
+        }
+        model.addAttribute("history_card",this.historyCardService.findByUserId(userId));
+        model.addAttribute("user",this.userService.findUserById(userId));
+        return 0;
+    }
+
     public List<ProductResponse>findByAllProductActive(){
         int pageSize = 10;
         int pageNumber = 1;

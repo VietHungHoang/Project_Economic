@@ -42,8 +42,9 @@
             <div class="col-md-3">
                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Đơn hàng</a>
-                    <!--                            <a class="nav-link " id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-heart"></i>Sản phẩm yêu thích</a>-->
                     <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Thông tin tài khoản</a>
+                    <a class="nav-link " id="payment-nav" data-toggle="pill" href="#pass-tab" role="tab"><i class="fa fa-key"></i>Mật khẩu</a>
+
                 </div>
             </div>
             <div class="col-md-9">
@@ -124,18 +125,24 @@
                         <h4>Thay đổi thông tin</h4>
                         <div class="row">
                             <div class="col-md-6">
-                                <input class="form-control" type="text" th:placeholder="${user.getUsername()}" th:field="*{username}">
+                                <label for="usern">Tên đăng nhập:</label>
+                                <input id = "usern" class="form-control" type="text" th:placeholder="${user.getUsername()}" th:field="*{username}">
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" th:placeholder="${user.getEmail()}" th:field="*{email}">
+                                <label for="emai">Địa chỉ email:</label>
+                                <input id = "emai" class="form-control" type="email" th:placeholder="${user.getEmail()}" th:field="*{email}">
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" th:placeholder="${user.getAddress() != null ?
+                                <label for="add">Địa chỉ:</label>
+                                <input id="add" class="form-control" type="text" th:placeholder="${user.getAddress() != null ?
                                             user.getAddress() : 'Địa chỉ'}" th:field="*{address}">
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" th:placeholder="${user.getPhoneNumber() != null ?
-                                            user.getPhoneNumber() : 'Số điện thoại'}" th:field="*{phoneNumber}">
+                                <label for="phone">Số điện thoại:</label>
+                                <span id="phone-error" style="color: red;"></span>
+                                <input id = "phone" class="form-control" type="text" pattern="0[0-9]{6, 12}" th:placeholder="${user.getPhoneNumber() != null ?
+                                            user.getPhoneNumber() : 'Số điện thoại'}" th:field="*{phoneNumber}"  oninput="validatePhoneNumber(this)">
+
                             </div>
                             <div class="col-md-12">
                                 <button class="btn" type="submit">Cập nhật</button>
@@ -144,22 +151,33 @@
                         </div>
                     </form>
 
-<!--                    <h4>Đổi mật khẩu</h4>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <input class="form-control" type="text" placeholder="Mật khẩu hiện tại">-->
-<!--                        </div>-->
-<!--                        <div class="col-md-6">-->
-<!--                            <input class="form-control" type="text" placeholder="Mật khẩu mới">-->
-<!--                        </div>-->
-<!--                        <div class="col-md-6">-->
-<!--                            <input class="form-control" type="text" placeholder="Nhập lại mật khẩu">-->
-<!--                        </div>-->
-<!--                        <div class="col-md-12">-->
-<!--                            <button class="btn">Lưu thay đổi</button>-->
-<!--                            <br><br>-->
-<!--                        </div>-->
-<!--                    </div>-->
+<!--                    <form id="pass-tab" class="tab-pane fade" role="tabpanel" aria-labelledby="account-nav">-->
+
+                        <div id="pass-tab" class="tab-pane fade" role="tabpanel" aria-labelledby="payment-nav">
+                            <h4>Đổi mật khẩu</h4>
+                            <div class="col-md-12 align-items-center" id="error-pass-1" style="display: none; margin-bottom: 10px">
+                                <h6 class="text-danger" >Sai mật khẩu!</h6>
+                            </div>
+                            <div class="col-md-12 align-items-center" id="error-pass-2" style="display: none; margin-bottom: 10px">
+                                <h6 class="text-danger" >Mật khẩu không khớp!</h6>
+                            </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="form-control" type="password" name="pass-now" id="pass-now" placeholder="Mật khẩu hiện tại" oninput="validateInput(this)">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="password" name="pass-1" id="pass-1" placeholder="Mật khẩu mới" oninput="validateInput(this)">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="password" name="pass-2" id="pass-2" placeholder="Nhập lại mật khẩu" oninput="validateInput(this)">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="btn" onclick="check_pass()">Lưu thay đổi</button>
+                                        <br><br>
+                                    </div>
+                                </div>
+                        </div>
                     <div style="margin-bottom:130px"></div>
                 </div>
             </div>
@@ -167,7 +185,8 @@
     </div>
 </div>
 </div>
-<!-- Footer Bottom Start -->
+
+<!-- Footer -->
 <div class="footer-bottom">
     <div class="container">
         <div class="row">
@@ -187,6 +206,63 @@
 <script th:src="@{/lib/slick/slick.min.js}"></script>
 <script th:src="@{/images/main.js}"></script>
 <script th:inline="javascript">
+    function validatePhoneNumber(input) {
+        var phoneNumber = input.value;
+        var isValid = /^0[0-9]{6,12}$/.test(phoneNumber);
+
+        if (!isValid) {
+            input.setCustomValidity('Số điện thoại phải bắt đầu từ 0 và có từ 7 - 13 chữ số.');
+        } else {
+            input.setCustomValidity('');
+        }
+    }
+    function validateInput(input) {
+        var inputField = input.value.trim();
+
+        if (inputField === '') {
+            input.setCustomValidity('Vui lòng điền vào đây!');
+        } else {
+            input.setCustomValidity('');
+        }
+    }
+    function check_pass(){
+        var passNow = document.getElementById("pass-now").value;
+        var pass1 = document.getElementById("pass-1").value;
+        var pass2 = document.getElementById("pass-2").value;
+        console.log(passNow)
+        var userId = ''
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.startsWith('userId=')) {
+                userId = cookie.substring('userId='.length, cookie.length);
+                break;
+            }
+        }
+        var url="/api/users/change-password/";
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:{userId : userId, passNow : passNow, pass1 : pass1, pass2 : pass2},
+            success:function (res){
+                if(res == 0){
+                    alert("Đổi mật khẩu thành công!")
+                    window.location.href = 'http://localhost:3000/api/history-page/' + userId;
+                }
+                else if(res == 1 && pass1 != "" && pass2 != "" && passNow != ""){
+                    document.getElementById("error-pass-1").style.display = "block";
+                    document.getElementById("error-pass-2").style.display = "none";
+                }
+                else if(res == 2 && pass1 != "" && pass2 != "" && passNow != ""){
+                    document.getElementById("error-pass-1").style.display = "none";
+                    document.getElementById("error-pass-2").style.display = "block";
+                }
+            },
+            error:function (xhr,status,error){
+                console.log("nol");
+            }
+        })
+    }
     getUserNameFromCookie();
 </script>
 

@@ -41,7 +41,7 @@ public class ShoppingCartController {
     @ResponseBody
     public Long useDiscount(@PathVariable String discountName, Model model){
         try{
-            DiscountEntity discountEntity = this.discountService.findByName(discountName);
+            DiscountEntity discountEntity = this.discountService.findByName(discountName.toLowerCase());
             if(discountEntity == null){
                 return 0l;
             }

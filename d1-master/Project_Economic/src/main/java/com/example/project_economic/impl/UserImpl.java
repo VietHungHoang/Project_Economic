@@ -25,7 +25,7 @@ public class UserImpl implements UserService {
         userEntity.setRoles("USER");
         Optional<UserEntity>user=this.userRepository.findByUsername(userEntity.getUsername());
         if(user.isPresent()){
-            throw new Exception("Username "+ userEntity.getUsername()+" is already registed!");
+            throw new Exception("Tài khoản "+ userEntity.getUsername()+" đã tồn tại!");
         }
         UserEntity userSaved=this.userRepository.save(userEntity);
         return userSaved;
@@ -40,6 +40,7 @@ public class UserImpl implements UserService {
         UserEntity userEntityFind = new UserEntity();
         try{
             userEntityFind = this.userRepository.findById(userId).get();
+            userEntityFind.setPassword(this.userRepository.findById(userId).get().getPassword());
             userEntityFind.setUsername(userEntity.getUsername() != "" ? userEntity.getUsername() : userEntityFind.getUsername());
             userEntityFind.setEmail(userEntity.getEmail() != "" ? userEntity.getEmail() : userEntityFind.getEmail());
             userEntityFind.setAddress(userEntity.getAddress() != "" ?  userEntity.getAddress() : userEntityFind.getAddress());

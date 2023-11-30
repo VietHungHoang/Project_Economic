@@ -47,7 +47,7 @@
                         <form class="col pl-0" th:action="@{/api/products/create}" method="post"
                               th:object="${product}" enctype="multipart/form-data">
                             <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Tên sản phẩm" th:field="*{name}">
+                                <input class="form-control" type="text" placeholder="Tên sản phẩm" th:field="*{name}" required>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
@@ -56,11 +56,11 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Giá gốc" th:field="*{costPrice}">
+                                <input class="form-control" type="text" placeholder="Giá gốc" th:field="*{costPrice}" oninput="validateMoneyNumber(this)" required>
                             </div>
                             <div class="col-md-6">
                                 <input class="form-control" type="text" placeholder="Giá sale"
-                                       th:field="*{salePrice}">
+                                       th:field="*{salePrice}" oninput="validateMoneyNumber(this)" required>
                             </div>
                             <div class="col-md-12">
                                 <input class="form-control w-50" type="number" placeholder="Số lượng"
@@ -100,11 +100,11 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" th:placeholder="${productEdit.getCostPrice()}" th:field="*{costPrice}">
+                                <input class="form-control" type="text" pattern="[0-9]+$" oninput="validateMoneyNumber(this)" th:placeholder="${productEdit.getCostPrice()}" th:field="*{costPrice}">
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" th:placeholder="${productEdit.getSalePrice()}"
-                                       th:field="*{salePrice}">
+                                <input class="form-control" type="text" pattern="[0-9]+"  th:placeholder="${productEdit.getSalePrice()} "
+                                       th:field="*{salePrice}" oninput="validateMoneyNumber(this)">
                             </div>
                             <div class="col-md-12">
                                 <input class="form-control w-50" type="number" th:placeholder="${productEdit.getCurrentQuantity()}"
@@ -250,6 +250,16 @@
 <script src="/images/main.js"></script>
 <script>
     getUserNameFromCookie()
+    function validateMoneyNumber(input) {
+        var phoneNumber = input.value;
+        var isValid = /^[0-9]+$/.test(phoneNumber);
+
+        if (!isValid) {
+            input.setCustomValidity('Số tiền không hợp lệ!');
+        } else {
+            input.setCustomValidity('');
+        }
+    }
     function getUserId() {
         var cookies = document.cookie.split(';');
         var userId = '';
